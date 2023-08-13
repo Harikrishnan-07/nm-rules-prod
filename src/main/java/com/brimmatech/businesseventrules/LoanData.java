@@ -10,7 +10,7 @@ public class LoanData implements java.io.Serializable {
 
 	private java.lang.String firstName;
 	private java.lang.String lastName;
-	private java.lang.Integer id;
+	private java.lang.String loanId;
 
 	public LoanData() {
 	}
@@ -31,19 +31,19 @@ public class LoanData implements java.io.Serializable {
 		this.lastName = lastName;
 	}
 
-	public java.lang.Integer getId() {
-		return this.id;
+	public java.lang.String getLoanId() {
+		return this.loanId;
 	}
 
-	public void setId(java.lang.Integer id) {
-		this.id = id;
+	public void setLoanId(java.lang.String loanId) {
+		this.loanId = loanId;
 	}
 
 	public LoanData(java.lang.String firstName, java.lang.String lastName,
-			java.lang.Integer id) {
+			java.lang.String loanId) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.id = id;
+		this.loanId = loanId;
 	}
 
 }
