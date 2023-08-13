@@ -10,6 +10,10 @@ public class BusinessEventFindings implements java.io.Serializable {
 
 	private com.brimmatech.businesseventrules.LoanFields loanFields;
 
+	private com.brimmatech.businesseventrules.BusinessEventFindings businessEventFindings;
+
+	private com.brimmatech.businesseventrules.LoanData loanData;
+
 	public BusinessEventFindings() {
 	}
 
@@ -22,9 +26,30 @@ public class BusinessEventFindings implements java.io.Serializable {
 		this.loanFields = loanFields;
 	}
 
+	public com.brimmatech.businesseventrules.BusinessEventFindings getBusinessEventFindings() {
+		return this.businessEventFindings;
+	}
+
+	public void setBusinessEventFindings(
+			com.brimmatech.businesseventrules.BusinessEventFindings businessEventFindings) {
+		this.businessEventFindings = businessEventFindings;
+	}
+
+	public com.brimmatech.businesseventrules.LoanData getLoanData() {
+		return this.loanData;
+	}
+
+	public void setLoanData(com.brimmatech.businesseventrules.LoanData loanData) {
+		this.loanData = loanData;
+	}
+
 	public BusinessEventFindings(
-			com.brimmatech.businesseventrules.LoanFields loanFields) {
+			com.brimmatech.businesseventrules.LoanFields loanFields,
+			com.brimmatech.businesseventrules.BusinessEventFindings businessEventFindings,
+			com.brimmatech.businesseventrules.LoanData loanData) {
 		this.loanFields = loanFields;
+		this.businessEventFindings = businessEventFindings;
+		this.loanData = loanData;
 	}
 
 }
