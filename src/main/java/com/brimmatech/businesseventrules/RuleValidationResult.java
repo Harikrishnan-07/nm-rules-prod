@@ -6,12 +6,34 @@ package com.brimmatech.businesseventrules;
 
 public class RuleValidationResult implements java.io.Serializable {
 
-    static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-    public RuleValidationResult() {
-    }
+	private java.lang.String ruleId;
+	private java.lang.String validationResult;
 
+	public RuleValidationResult() {
+	}
 
+	public java.lang.String getRuleId() {
+		return this.ruleId;
+	}
 
+	public void setRuleId(java.lang.String ruleId) {
+		this.ruleId = ruleId;
+	}
+
+	public java.lang.String getValidationResult() {
+		return this.validationResult;
+	}
+
+	public void setValidationResult(java.lang.String validationResult) {
+		this.validationResult = validationResult;
+	}
+
+	public RuleValidationResult(java.lang.String ruleId,
+			java.lang.String validationResult) {
+		this.ruleId = ruleId;
+		this.validationResult = validationResult;
+	}
 
 }
