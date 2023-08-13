@@ -5,5 +5,7 @@ import java.lang.Number;
 rule "grl_loan_data_first_name_is_empty"
 	dialect "mvel"
 	when
+		For business event
+		If laon data exist
 	then
 end
