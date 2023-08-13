@@ -1,1 +1,4 @@
-[condition][]If laon data exist = eval(getLoanDataForTheBusinessEvent($codifiedFindings) == true)
+[condition][]For business event = $businessEventFindings:  BusinessEventFindings()
+                                            $loanFields: LoanFields()
+
+[condition][]If laon data exist = eval(getLoanDataForTheBusinessEvent($businessEventFindings) == true)
