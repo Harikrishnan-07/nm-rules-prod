@@ -1,6 +1,6 @@
 package com.brimmatech.businesseventrules;
 
-function Boolean getLoanDataForTheBusinessEvent(LoanData loanData)
+function String getLoanDataForTheBusinessEvent(LoanData loanData)
 {
       if (loanData != null && loanData.getId() != null)
       {
