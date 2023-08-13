@@ -9,7 +9,7 @@ public class RuleValidationResult implements java.io.Serializable {
 	static final long serialVersionUID = 1L;
 
 	private java.lang.String ruleId;
-	private java.lang.String validationResult;
+	private boolean validationResult;
 
 	public RuleValidationResult() {
 	}
@@ -22,16 +22,16 @@ public class RuleValidationResult implements java.io.Serializable {
 		this.ruleId = ruleId;
 	}
 
-	public java.lang.String getValidationResult() {
+	public boolean isValidationResult() {
 		return this.validationResult;
 	}
 
-	public void setValidationResult(java.lang.String validationResult) {
+	public void setValidationResult(boolean validationResult) {
 		this.validationResult = validationResult;
 	}
 
 	public RuleValidationResult(java.lang.String ruleId,
-			java.lang.String validationResult) {
+			boolean validationResult) {
 		this.ruleId = ruleId;
 		this.validationResult = validationResult;
 	}
