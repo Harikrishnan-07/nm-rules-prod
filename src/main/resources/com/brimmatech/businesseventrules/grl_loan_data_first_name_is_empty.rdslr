@@ -1,0 +1,9 @@
+package com.brimmatech.businesseventrules;
+
+import java.lang.Number;
+
+rule "grl_loan_data_first_name_is_empty"
+	dialect "mvel"
+	when
+	then
+end
