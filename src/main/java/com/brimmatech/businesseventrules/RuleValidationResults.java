@@ -8,23 +8,23 @@ public class RuleValidationResults implements java.io.Serializable {
 
 	static final long serialVersionUID = 1L;
 
-	private java.util.List<com.brimmatech.businesseventrules.RuleValidationResult> ruleValidationResult;
+	private java.util.List<com.brimmatech.businesseventrules.RuleValidationResult> ruleValidationResultList;
 
 	public RuleValidationResults() {
 	}
 
-	public java.util.List<com.brimmatech.businesseventrules.RuleValidationResult> getRuleValidationResult() {
-		return this.ruleValidationResult;
+	public java.util.List<com.brimmatech.businesseventrules.RuleValidationResult> getRuleValidationResultList() {
+		return this.ruleValidationResultList;
 	}
 
-	public void setRuleValidationResult(
-			java.util.List<com.brimmatech.businesseventrules.RuleValidationResult> ruleValidationResult) {
-		this.ruleValidationResult = ruleValidationResult;
+	public void setRuleValidationResultList(
+			java.util.List<com.brimmatech.businesseventrules.RuleValidationResult> ruleValidationResultList) {
+		this.ruleValidationResultList = ruleValidationResultList;
 	}
 
 	public RuleValidationResults(
-			java.util.List<com.brimmatech.businesseventrules.RuleValidationResult> ruleValidationResult) {
-		this.ruleValidationResult = ruleValidationResult;
+			java.util.List<com.brimmatech.businesseventrules.RuleValidationResult> ruleValidationResultList) {
+		this.ruleValidationResultList = ruleValidationResultList;
 	}
 
 }
