@@ -1,0 +1,1 @@
+[condition][]If laon data exist = eval(getLoanDataForTheBusinessEvent($codifiedFindings) == true)
