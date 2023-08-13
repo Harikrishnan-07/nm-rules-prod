@@ -6,12 +6,24 @@ package com.brimmatech.businesseventrules;
 
 public class LoanFields implements java.io.Serializable {
 
-    static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-    public LoanFields() {
-    }
+	private com.brimmatech.businesseventrules.LoanFields loanField;
 
+	public LoanFields() {
+	}
 
+	public com.brimmatech.businesseventrules.LoanFields getLoanField() {
+		return this.loanField;
+	}
 
+	public void setLoanField(
+			com.brimmatech.businesseventrules.LoanFields loanField) {
+		this.loanField = loanField;
+	}
+
+	public LoanFields(com.brimmatech.businesseventrules.LoanFields loanField) {
+		this.loanField = loanField;
+	}
 
 }
