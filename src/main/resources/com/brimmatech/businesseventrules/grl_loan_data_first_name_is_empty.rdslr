@@ -6,6 +6,7 @@ rule "grl_loan_data_first_name_is_empty"
 	dialect "mvel"
 	when
 		For business event
+		If loan data exist
 	then
 		Update Fields for the given business event BE_0001
 end
