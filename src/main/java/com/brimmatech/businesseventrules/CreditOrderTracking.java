@@ -11,6 +11,8 @@ public class CreditOrderTracking implements java.io.Serializable {
 	private Integer id;
 	private Integer folderId;
 
+	private java.lang.String creditReferenceNumbers;
+
 	public CreditOrderTracking() {
 	}
 
@@ -30,9 +32,20 @@ public class CreditOrderTracking implements java.io.Serializable {
 		this.folderId = folderId;
 	}
 
-	public CreditOrderTracking(java.lang.Integer id, java.lang.Integer folderId) {
+	public java.lang.String getCreditReferenceNumbers() {
+		return this.creditReferenceNumbers;
+	}
+
+	public void setCreditReferenceNumbers(
+			java.lang.String creditReferenceNumbers) {
+		this.creditReferenceNumbers = creditReferenceNumbers;
+	}
+
+	public CreditOrderTracking(java.lang.Integer id,
+			java.lang.Integer folderId, java.lang.String creditReferenceNumbers) {
 		this.id = id;
 		this.folderId = folderId;
+		this.creditReferenceNumbers = creditReferenceNumbers;
 	}
 
 }
