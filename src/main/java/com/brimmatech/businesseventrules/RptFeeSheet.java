@@ -9,7 +9,7 @@ public class RptFeeSheet implements java.io.Serializable {
 	static final long serialVersionUID = 1L;
 
 	private java.lang.Integer folderId;
-	private java.math.BigInteger id;
+	private Integer id;
 
 	public RptFeeSheet() {
 	}
@@ -22,15 +22,15 @@ public class RptFeeSheet implements java.io.Serializable {
 		this.folderId = folderId;
 	}
 
-	public java.math.BigInteger getId() {
+	public java.lang.Integer getId() {
 		return this.id;
 	}
 
-	public void setId(java.math.BigInteger id) {
+	public void setId(java.lang.Integer id) {
 		this.id = id;
 	}
 
-	public RptFeeSheet(java.lang.Integer folderId, java.math.BigInteger id) {
+	public RptFeeSheet(java.lang.Integer folderId, java.lang.Integer id) {
 		this.folderId = folderId;
 		this.id = id;
 	}
