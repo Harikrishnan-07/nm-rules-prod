@@ -6,12 +6,33 @@ package com.brimmatech.businesseventrules;
 
 public class RptFeeSheet implements java.io.Serializable {
 
-    static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-    public RptFeeSheet() {
-    }
+	private java.lang.Integer folderId;
+	private java.math.BigInteger id;
 
+	public RptFeeSheet() {
+	}
 
+	public java.lang.Integer getFolderId() {
+		return this.folderId;
+	}
 
+	public void setFolderId(java.lang.Integer folderId) {
+		this.folderId = folderId;
+	}
+
+	public java.math.BigInteger getId() {
+		return this.id;
+	}
+
+	public void setId(java.math.BigInteger id) {
+		this.id = id;
+	}
+
+	public RptFeeSheet(java.lang.Integer folderId, java.math.BigInteger id) {
+		this.folderId = folderId;
+		this.id = id;
+	}
 
 }
