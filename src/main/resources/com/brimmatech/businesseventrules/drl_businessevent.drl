@@ -11,7 +11,7 @@ function String getLoanDataForTheBusinessEvent(LoanData loanData)
 
 function Boolean getFolderIdForTheBusinessEvent(LoanData loanData)
 {
-      if(loanData != null && loanData.get.RptFeeSheet() != null && loanData.get.RptFeeSheet().getFolderId() != null)
+      if(loanData != null && loanData.get.RptFeeSheet() != null && loanData.getRptFeeSheet().getFolderId() != null)
       {
         return "true";
       }
