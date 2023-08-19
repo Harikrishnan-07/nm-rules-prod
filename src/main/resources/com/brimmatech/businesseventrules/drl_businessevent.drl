@@ -9,9 +9,27 @@ function String getLoanDataForTheBusinessEvent(LoanData loanData)
       return "false";
 }
 
-function String getFolderIdForTheBusinessEvent(LoanData loanData)
+function String getFolderIdForTheBusinessEventFromRptFeeSheet(LoanData loanData)
 {
       if(loanData != null && loanData.getRptFeeSheet() != null && loanData.getRptFeeSheet().getFolderId() != null)
+      {
+        return "true";
+      }
+      return "false";
+}
+
+function String getFolderIdForTheBusinessEventForFolderId(LoanData loanData)
+{
+      if(loanData != null && loanData.getCreditOrderTracking() != null && loanData.getCreditOrderTracking().getFolderId() != null)
+      {
+        return "true";
+      }
+      return "false";
+}
+
+function String getFolderIdForTheBusinessEventForCreditReferenceNumber(LoanData loanData)
+{
+      if(loanData != null && loanData.getCreditOrderTracking() != null && loanData.getCreditOrderTracking().getCreditReferenceNumbers() != null)
       {
         return "true";
       }
