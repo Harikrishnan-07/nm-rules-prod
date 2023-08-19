@@ -6,12 +6,34 @@ package com.brimmatech.businesseventrules;
 
 public class CreditOrderTracking implements java.io.Serializable {
 
-    static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-    public CreditOrderTracking() {
-    }
+	private java.math.BigInteger id;
+	private java.math.BigInteger folderId;
 
+	public CreditOrderTracking() {
+	}
 
+	public java.math.BigInteger getId() {
+		return this.id;
+	}
 
+	public void setId(java.math.BigInteger id) {
+		this.id = id;
+	}
+
+	public java.math.BigInteger getFolderId() {
+		return this.folderId;
+	}
+
+	public void setFolderId(java.math.BigInteger folderId) {
+		this.folderId = folderId;
+	}
+
+	public CreditOrderTracking(java.math.BigInteger id,
+			java.math.BigInteger folderId) {
+		this.id = id;
+		this.folderId = folderId;
+	}
 
 }
