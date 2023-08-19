@@ -14,6 +14,10 @@ public class LoanData implements java.io.Serializable {
 
 	private java.lang.String loanIdentifier;
 
+	private com.brimmatech.businesseventrules.RptFeeSheet rptFeeSheet;
+
+	private com.brimmatech.businesseventrules.CreditOrderTracking creditOrderTracking;
+
 	public LoanData() {
 	}
 
@@ -49,12 +53,37 @@ public class LoanData implements java.io.Serializable {
 		this.loanIdentifier = loanIdentifier;
 	}
 
-	public LoanData(java.lang.String firstName, java.lang.String lastName,
-			java.lang.String loanId, java.lang.String loanIdentifier) {
+	public com.brimmatech.businesseventrules.RptFeeSheet getRptFeeSheet() {
+		return this.rptFeeSheet;
+	}
+
+	public void setRptFeeSheet(
+			com.brimmatech.businesseventrules.RptFeeSheet rptFeeSheet) {
+		this.rptFeeSheet = rptFeeSheet;
+	}
+
+	public com.brimmatech.businesseventrules.CreditOrderTracking getCreditOrderTracking() {
+		return this.creditOrderTracking;
+	}
+
+	public void setCreditOrderTracking(
+			com.brimmatech.businesseventrules.CreditOrderTracking creditOrderTracking) {
+		this.creditOrderTracking = creditOrderTracking;
+	}
+
+	public LoanData(
+			java.lang.String firstName,
+			java.lang.String lastName,
+			java.lang.String loanId,
+			java.lang.String loanIdentifier,
+			com.brimmatech.businesseventrules.RptFeeSheet rptFeeSheet,
+			com.brimmatech.businesseventrules.CreditOrderTracking creditOrderTracking) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.loanId = loanId;
 		this.loanIdentifier = loanIdentifier;
+		this.rptFeeSheet = rptFeeSheet;
+		this.creditOrderTracking = creditOrderTracking;
 	}
 
 }
