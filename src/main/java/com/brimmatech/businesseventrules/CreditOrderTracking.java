@@ -8,30 +8,29 @@ public class CreditOrderTracking implements java.io.Serializable {
 
 	static final long serialVersionUID = 1L;
 
-	private java.math.BigInteger id;
-	private java.math.BigInteger folderId;
+	private Integer id;
+	private Integer folderId;
 
 	public CreditOrderTracking() {
 	}
 
-	public java.math.BigInteger getId() {
+	public java.lang.Integer getId() {
 		return this.id;
 	}
 
-	public void setId(java.math.BigInteger id) {
+	public void setId(java.lang.Integer id) {
 		this.id = id;
 	}
 
-	public java.math.BigInteger getFolderId() {
+	public java.lang.Integer getFolderId() {
 		return this.folderId;
 	}
 
-	public void setFolderId(java.math.BigInteger folderId) {
+	public void setFolderId(java.lang.Integer folderId) {
 		this.folderId = folderId;
 	}
 
-	public CreditOrderTracking(java.math.BigInteger id,
-			java.math.BigInteger folderId) {
+	public CreditOrderTracking(java.lang.Integer id, java.lang.Integer folderId) {
 		this.id = id;
 		this.folderId = folderId;
 	}
