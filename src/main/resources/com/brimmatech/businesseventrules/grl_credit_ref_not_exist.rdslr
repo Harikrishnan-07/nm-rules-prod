@@ -4,6 +4,10 @@ import java.lang.Number;
 
 rule "grl_credit_ref_not_exist"
 	dialect "mvel"
+	agenda-group "rule-set1"
 	when
+		For business event
+		If folder id and credit reference does not exist
 	then
+		Update Fields for the given business event BE_0002
 end
