@@ -38,10 +38,10 @@ function String getFolderIdForTheBusinessEventForCreditReferenceNumber(LoanData 
 
 function String getReferenceNumber(LoanData loanData)
 {
-    String isValid = true;
+    String isValid = "true";
     if(loanData != null && loanData.getCreditOrderTracking() != null && loanData.getCreditOrderTracking().getCreditReferenceNumbers() != null)
     {
-        isValid = false;
+        isValid = "false";
     }
     return isValid;
 }
