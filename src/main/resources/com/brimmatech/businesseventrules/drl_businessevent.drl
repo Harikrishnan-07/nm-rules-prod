@@ -13,25 +13,25 @@ function String getFolderIdForTheBusinessEventFromRptFeeSheet(LoanData loanData)
 {
       if(loanData != null && loanData.getRptFeeSheet() != null && loanData.getRptFeeSheet().getFolderId() != null)
       {
-        return "true";
+        return "false";
       }
-      return "false";
+      return "true";
 }
 
 function String getFolderIdForTheBusinessEventForFolderId(LoanData loanData)
 {
       if(loanData != null && loanData.getCreditOrderTracking() != null && loanData.getCreditOrderTracking().getFolderId() != null)
       {
-        return "true";
+        return "false";
       }
-      return "false";
+      return "true";
 }
 
 function String getFolderIdForTheBusinessEventForCreditReferenceNumber(LoanData loanData)
 {
       if(loanData != null && loanData.getCreditOrderTracking() != null && loanData.getCreditOrderTracking().getCreditReferenceNumbers() != null)
       {
-        return "true";
+        return "false";
       }
-      return "false";
+      return "true";
 }
