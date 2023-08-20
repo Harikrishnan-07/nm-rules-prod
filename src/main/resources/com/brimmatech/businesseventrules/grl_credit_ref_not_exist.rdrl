@@ -1,9 +1,0 @@
-package com.brimmatech.businesseventrules;
-
-import java.lang.Number;
-
-rule "grl_credit_ref_not_exist"
-	dialect "mvel"
-	when
-	then
-end
