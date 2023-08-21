@@ -1,0 +1,13 @@
+package com.brimmatech.businesseventrules;
+
+import java.lang.Number;
+
+rule "grl_credit_ref_not_exist"
+	dialect "mvel"
+	agenda-group "rule-set1"
+	when
+		For business event
+		If credit order tracking does not exist
+	then
+		Update Fields for the given business event BE_0004
+end
