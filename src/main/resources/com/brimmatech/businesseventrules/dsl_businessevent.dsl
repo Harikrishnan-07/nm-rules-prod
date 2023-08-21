@@ -11,8 +11,8 @@
 [condition][]If rpt fee sheet do exist = eval(validateRptFeesheetFolderId($loanData) == "true")
 [condition][]If rpt fee sheet does not exist = eval(validateRptFeesheetFolderId($loanData) == "false")
 
-[consequence][]Update Fields for the given business event BE_0004 =
-               RuleValidationResult ruleValidationResult = new RuleValidationResult("Rule 4", validateCreditOrderTrackingCreditReferenceNumber($loanData));
+[consequence][]Update Fields for the given business event BE_0002 =
+               RuleValidationResult ruleValidationResult = new RuleValidationResult("Rule 2", validateCreditOrderTrackingCreditReferenceNumber($loanData));
 		       $ruleValidationResults.getRuleValidationResultList().add(ruleValidationResult);
 
 [condition][]If credit order tracking do exist = eval(validateCreditOrderTrackingCreditReferenceNumber($loanData) == "true")
