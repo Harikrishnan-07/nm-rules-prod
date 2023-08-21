@@ -9,34 +9,7 @@ function String getLoanDataForTheBusinessEvent(LoanData loanData)
       return "false";
 }
 
-function String getFolderIdForTheBusinessEventFromRptFeeSheet(LoanData loanData)
-{
-      if(loanData != null && loanData.getRptFeeSheet() != null && loanData.getRptFeeSheet().getFolderId() != null)
-      {
-        return "false";
-      }
-      return "true";
-}
-
-function String getFolderIdForTheBusinessEventForFolderId(LoanData loanData)
-{
-      if(loanData != null && loanData.getCreditOrderTracking() != null && loanData.getCreditOrderTracking().getFolderId() != null)
-      {
-        return "false";
-      }
-      return "true";
-}
-
-function String getFolderIdForTheBusinessEventForCreditReferenceNumber(LoanData loanData)
-{
-      if(loanData != null && loanData.getCreditOrderTracking() != null && loanData.getCreditOrderTracking().getCreditReferenceNumbers() != null)
-      {
-        return "false";
-      }
-      return "true";
-}
-
-function String getReferenceNumber(LoanData loanData)
+function String validateCreditOrderTrackingCreditReferenceNumber(LoanData loanData)
 {
     String isValid = "true";
     if(loanData != null &&
@@ -45,6 +18,17 @@ function String getReferenceNumber(LoanData loanData)
     loanData.getCreditOrderTracking().getCreditReferenceNumbers() != null)
     {
         isValid = "false";
+    }
+    return isValid;
+}
+
+function String validateRptFeesheetFolderId(LoanData loanData) 
+{
+    String isValid = "true";
+    if(loanData != null && loanData.getRptFeeSheet() != null && loanData.getRptFeeSheet().getFolderId() != null)
+    {
+        isValid = "false";
+        
     }
     return isValid;
 }
