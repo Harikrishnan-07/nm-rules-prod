@@ -9,5 +9,5 @@ rule "grl_credit_ref_not_exist"
 		For business event
 		If credit order tracking does not exist
 	then
-		Update Fields for the given business event BE_0004
+		Update Fields for the given business event BE_0002
 end
