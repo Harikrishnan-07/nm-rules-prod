@@ -4,7 +4,7 @@ import java.lang.Number;
 
 rule "grl_credit_ref_not_exist"
 	dialect "mvel"
-	agenda-group "rule-set1"
+	agenda-group "rule-set2"
 	when
 		For business event
 		If credit order tracking does not exist
