@@ -1,0 +1,13 @@
+package com.brimmatech.businesseventrules;
+
+import java.lang.Number;
+
+rule "grl_loan_disclosed_today"
+	dialect "mvel"
+	agenda-group "rule-set6"
+	when
+		For scheduled event
+		If loan info do exist for the loan to be disclosed today
+	then
+		Update Fields for the given business event BE_0006
+end

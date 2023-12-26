@@ -8,82 +8,109 @@ public class LoanData implements java.io.Serializable {
 
 	static final long serialVersionUID = 1L;
 
-	private java.lang.String firstName;
-	private java.lang.String lastName;
-	private java.lang.String loanId;
+	private String loanIdentifier;
 
-	private java.lang.String loanIdentifier;
+	private RptFeeSheet rptFeeSheet;
 
-	private com.brimmatech.businesseventrules.RptFeeSheet rptFeeSheet;
+	private CreditOrderTracking creditOrderTracking;
 
-	private com.brimmatech.businesseventrules.CreditOrderTracking creditOrderTracking;
+	private String applicationDate;
+
+	private String rateLockExpirationDate;
+
+	private String initialDisclosuresDueDate;
+
+	private String estimatedClosingDate;
+
+	private String loanId;
 
 	public LoanData() {
 	}
 
-	public java.lang.String getFirstName() {
-		return this.firstName;
-	}
-
-	public void setFirstName(java.lang.String firstName) {
-		this.firstName = firstName;
-	}
-
-	public java.lang.String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(java.lang.String lastName) {
-		this.lastName = lastName;
-	}
-
-	public java.lang.String getLoanId() {
-		return this.loanId;
-	}
-
-	public void setLoanId(java.lang.String loanId) {
-		this.loanId = loanId;
-	}
-
-	public java.lang.String getLoanIdentifier() {
+	public String getLoanIdentifier() {
 		return this.loanIdentifier;
 	}
 
-	public void setLoanIdentifier(java.lang.String loanIdentifier) {
+	public void setLoanIdentifier(String loanIdentifier) {
 		this.loanIdentifier = loanIdentifier;
 	}
 
-	public com.brimmatech.businesseventrules.RptFeeSheet getRptFeeSheet() {
+	public RptFeeSheet getRptFeeSheet() {
 		return this.rptFeeSheet;
 	}
 
 	public void setRptFeeSheet(
-			com.brimmatech.businesseventrules.RptFeeSheet rptFeeSheet) {
+			RptFeeSheet rptFeeSheet) {
 		this.rptFeeSheet = rptFeeSheet;
 	}
 
-	public com.brimmatech.businesseventrules.CreditOrderTracking getCreditOrderTracking() {
+	public CreditOrderTracking getCreditOrderTracking() {
 		return this.creditOrderTracking;
 	}
 
 	public void setCreditOrderTracking(
-			com.brimmatech.businesseventrules.CreditOrderTracking creditOrderTracking) {
+			CreditOrderTracking creditOrderTracking) {
 		this.creditOrderTracking = creditOrderTracking;
 	}
 
-	public LoanData(
-			java.lang.String firstName,
-			java.lang.String lastName,
-			java.lang.String loanId,
-			java.lang.String loanIdentifier,
-			com.brimmatech.businesseventrules.RptFeeSheet rptFeeSheet,
-			com.brimmatech.businesseventrules.CreditOrderTracking creditOrderTracking) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public String getApplicationDate() {
+		return this.applicationDate;
+	}
+
+	public void setApplicationDate(String applicationDate) {
+		this.applicationDate = applicationDate;
+	}
+
+	public String getRateLockExpirationDate() {
+		return this.rateLockExpirationDate;
+	}
+
+	public void setRateLockExpirationDate(
+			String rateLockExpirationDate) {
+		this.rateLockExpirationDate = rateLockExpirationDate;
+	}
+
+	public String getInitialDisclosuresDueDate() {
+		return this.initialDisclosuresDueDate;
+	}
+
+	public void setInitialDisclosuresDueDate(
+			String initialDisclosuresDueDate) {
+		this.initialDisclosuresDueDate = initialDisclosuresDueDate;
+	}
+
+	public String getEstimatedClosingDate() {
+		return this.estimatedClosingDate;
+	}
+
+	public void setEstimatedClosingDate(String estimatedClosingDate) {
+		this.estimatedClosingDate = estimatedClosingDate;
+	}
+
+	public String getLoanId() {
+		return this.loanId;
+	}
+
+	public void setLoanId(String loanId) {
 		this.loanId = loanId;
+	}
+
+	public LoanData(
+			String loanIdentifier,
+			RptFeeSheet rptFeeSheet,
+			CreditOrderTracking creditOrderTracking,
+			String applicationDate,
+			String rateLockExpirationDate,
+			String initialDisclosuresDueDate,
+			String estimatedClosingDate, String loanId) {
 		this.loanIdentifier = loanIdentifier;
 		this.rptFeeSheet = rptFeeSheet;
 		this.creditOrderTracking = creditOrderTracking;
+		this.applicationDate = applicationDate;
+		this.rateLockExpirationDate = rateLockExpirationDate;
+		this.initialDisclosuresDueDate = initialDisclosuresDueDate;
+		this.estimatedClosingDate = estimatedClosingDate;
+		this.loanId = loanId;
 	}
 
 }
