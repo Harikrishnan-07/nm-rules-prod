@@ -52,7 +52,7 @@ function String validateLoanToBeDisclosedInTwoDays(LoanDto loanDto)
                     String localDateString = LocalDate.now().format(inputFormatter);
                     LocalDate currentDate = LocalDate.parse(localDateString, inputFormatter);
 
-                    if (applicationDate != null && applicationDate.compareTo(currentDate) == 0) {
+                    if (applicationDate != null && ChronoUnit.DAYS.between(applicationDate, currentDate) == 2) {
 
                         String loanIdentifier = loanDataList.get(i).getLoanIdentifier();
 
@@ -80,7 +80,7 @@ function String validateLoanToBeDisclosedInOneDay(LoanDto loanDto)
                     String localDateString = LocalDate.now().format(inputFormatter);
                     LocalDate currentDate = LocalDate.parse(localDateString, inputFormatter);
 
-                    if (applicationDate != null && applicationDate.compareTo(LocalDate.now()) == 1) {
+                    if (applicationDate != null && ChronoUnit.DAYS.between(applicationDate, currentDate) == 1) {
 
                         String loanIdentifier = loanDataList.get(i).getLoanIdentifier();
 
@@ -108,7 +108,7 @@ function String validateLoanToBeDisclosedToday(LoanDto loanDto)
                     String localDateString = LocalDate.now().format(inputFormatter);
                     LocalDate currentDate = LocalDate.parse(localDateString, inputFormatter);
 
-                    if (applicationDate != null && applicationDate.compareTo(LocalDate.now()) == 2) {
+                    if (applicationDate != null && ChronoUnit.DAYS.between(applicationDate, currentDate) == 0) {
 
                         String loanIdentifier = loanDataList.get(i).getLoanIdentifier();
 
@@ -136,7 +136,7 @@ function String validateLoansForTwoDaysFromApplicationDate(LoanDto loanDto)
                     String localDateString = LocalDate.now().format(inputFormatter);
                     LocalDate currentDate = LocalDate.parse(localDateString, inputFormatter);
 
-                    if (applicationDate != null && applicationDate.compareTo(currentDate) == 0) {
+                    if (applicationDate != null && ChronoUnit.DAYS.between(applicationDate, currentDate) == 2) {
 
                         return "true";
                     }
@@ -162,7 +162,7 @@ function String validateLoansForOneDayFromApplicationDate(LoanDto loanDto)
                     String localDateString = LocalDate.now().format(inputFormatter);
                     LocalDate currentDate = LocalDate.parse(localDateString, inputFormatter);
 
-                    if (applicationDate != null && applicationDate.compareTo(LocalDate.now()) == 1) {
+                    if (applicationDate != null && ChronoUnit.DAYS.between(applicationDate, currentDate) == 1) {
 
                         return "true";
                     }
@@ -188,7 +188,7 @@ function String validateLoansForToday(LoanDto loanDto)
                     String localDateString = LocalDate.now().format(inputFormatter);
                     LocalDate currentDate = LocalDate.parse(localDateString, inputFormatter);
 
-                    if (applicationDate != null && applicationDate.compareTo(LocalDate.now()) == 2) {
+                    if (applicationDate != null && ChronoUnit.DAYS.between(applicationDate, currentDate) == 0) {
 
                         return "true";
                     }
