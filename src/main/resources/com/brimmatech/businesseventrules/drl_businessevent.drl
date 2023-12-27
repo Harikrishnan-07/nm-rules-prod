@@ -57,7 +57,7 @@ function String validateLoanToBeDisclosedInTwoDays(LoanDto loanDto)
 
                         String loanIdentifier = loanDataList.get(i).getLoanIdentifier();
 
-                        appendedString += loanIdentifier;
+                        appendedString += loanIdentifier + " ,";
                     }
                 }
             }
@@ -85,7 +85,7 @@ function String validateLoanToBeDisclosedInOneDay(LoanDto loanDto)
 
                         String loanIdentifier = loanDataList.get(i).getLoanIdentifier();
 
-                        appendedString += loanIdentifier;
+                        appendedString += loanIdentifier + " ,";
                     }
                 }
             }
@@ -113,7 +113,7 @@ function String validateLoanToBeDisclosedToday(LoanDto loanDto)
 
                         String loanIdentifier = loanDataList.get(i).getLoanIdentifier();
 
-                        appendedString += loanIdentifier;
+                        appendedString += loanIdentifier + " ,";
                     }
                 }
             }
