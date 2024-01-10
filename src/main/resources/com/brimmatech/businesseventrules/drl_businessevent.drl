@@ -189,7 +189,7 @@ function String validateLoansForToday(LoanDto loanDto)
                     String localDateString = LocalDate.now().format(inputFormatter);
                     LocalDate currentDate = LocalDate.parse(localDateString, inputFormatter);
 
-                    if (applicationDate != null && ChronoUnit.DAYS.between(applicationDate, currentDate) ==) {
+                    if (applicationDate != null && ChronoUnit.DAYS.between(applicationDate, currentDate) == 3) {
 
                         return "true";
                     }
