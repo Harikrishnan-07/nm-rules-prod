@@ -7,29 +7,36 @@ package com.brimmatech.businesseventrules;
 @javax.persistence.Entity
 public class RulesData implements java.io.Serializable {
 
-    static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.AUTO, generator = "RULESDATA_ID_GENERATOR")
-    @javax.persistence.Id
-    @javax.persistence.SequenceGenerator(name = "RULESDATA_ID_GENERATOR", sequenceName = "RULESDATA_ID_SEQ")
-    private java.lang.Long id;
+	private java.lang.String ruleName;
 
-    public RulesData() {
-    }
-    
-    public RulesData(java.lang.Long id) {
-        this.id = id;
-    }
+	@javax.persistence.ElementCollection(fetch = javax.persistence.FetchType.EAGER)
+	private java.util.List<java.lang.String> ruleDataList;
 
-    public java.lang.Long getId() {
-        return this.id;
-    }
-    
-    public void setId(java.lang.Long id) {
-        this.id = id;
-    }
+	public RulesData() {
+	}
 
+	public java.lang.String getRuleName() {
+		return this.ruleName;
+	}
 
+	public void setRuleName(java.lang.String ruleName) {
+		this.ruleName = ruleName;
+	}
 
+	public java.util.List<java.lang.String> getRuleDataList() {
+		return this.ruleDataList;
+	}
+
+	public void setRuleDataList(java.util.List<java.lang.String> ruleDataList) {
+		this.ruleDataList = ruleDataList;
+	}
+
+	public RulesData(java.lang.String ruleName,
+			java.util.List<java.lang.String> ruleDataList) {
+		this.ruleName = ruleName;
+		this.ruleDataList = ruleDataList;
+	}
 
 }
