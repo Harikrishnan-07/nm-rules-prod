@@ -4,6 +4,10 @@ import java.lang.Number;
 
 rule "grl_initial_disclosure_due_in_two_days"
 	dialect "mvel"
+	agenda-group "initial_disclosure_due_two_days"
 	when
+		For trigger event
+		If initial disclosure due in two days
 	then
+		Send notifications for the Loans to be Disclosed in two days
 end
