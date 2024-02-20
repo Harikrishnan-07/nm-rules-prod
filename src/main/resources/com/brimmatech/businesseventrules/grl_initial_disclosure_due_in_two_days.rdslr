@@ -1,0 +1,9 @@
+package com.brimmatech.businesseventrules;
+
+import java.lang.Number;
+
+rule "grl_initial_disclosure_due_in_two_days"
+	dialect "mvel"
+	when
+	then
+end
