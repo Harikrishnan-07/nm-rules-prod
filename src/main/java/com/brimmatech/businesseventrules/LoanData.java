@@ -7,29 +7,23 @@ package com.brimmatech.businesseventrules;
 @javax.persistence.Entity
 public class LoanData implements java.io.Serializable {
 
-    static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.AUTO, generator = "LOANDATA_ID_GENERATOR")
-    @javax.persistence.Id
-    @javax.persistence.SequenceGenerator(name = "LOANDATA_ID_GENERATOR", sequenceName = "LOANDATA_ID_SEQ")
-    private java.lang.Long id;
+	private java.lang.String loanId;
 
-    public LoanData() {
-    }
-    
-    public LoanData(java.lang.Long id) {
-        this.id = id;
-    }
+	public LoanData() {
+	}
 
-    public java.lang.Long getId() {
-        return this.id;
-    }
-    
-    public void setId(java.lang.Long id) {
-        this.id = id;
-    }
+	public java.lang.String getLoanId() {
+		return this.loanId;
+	}
 
+	public void setLoanId(java.lang.String loanId) {
+		this.loanId = loanId;
+	}
 
-
+	public LoanData(java.lang.String loanId) {
+		this.loanId = loanId;
+	}
 
 }
