@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-function String fetchFolderIdsOnInitialDisclosureRule(RulesDataDto rulesDataDto, int days) {
+function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, int days) {
 
     String applicationDate = "";
     String folderId = "";
