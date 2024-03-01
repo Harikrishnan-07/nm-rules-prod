@@ -4,6 +4,10 @@ import java.lang.Number;
 
 rule "grl_loan_lock_expires_in_one_day"
 	dialect "mvel"
+	agenda-group "lock_expiring_in_one_day"
 	when
+		For trigger event
+		If loan expires in one day
 	then
+		Send notifications for the Loans to be Expired in one day
 end
