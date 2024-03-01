@@ -2,7 +2,7 @@ package com.brimmatech.businesseventrules;
 
 import java.lang.Number;
 
-rule "grl_loan_expires_today"
+rule "grl_loan_lock_expires_today"
 	dialect "mvel"
 	agenda-group "lock_expiring_today"
 	when
