@@ -1,13 +1,10 @@
 package com.brimmatech.businesseventrules;
 
-
-
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, int days) {
+function String fetchFolderIdsOnInitialDisclosureRule(RulesDataDto rulesDataDto, int days) {
 
     String applicationDate = "";
     String folderId = "";
@@ -33,12 +30,12 @@ function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, 
                         applicationDate = value;
                     }
                 }
-                if (applicationDate.length() > 0 && folderId.length() > 0 && isInitialDisclosureDue(applicationDate, days)) {
+            }
+            if (applicationDate.length() > 0 && folderId.length() > 0 && isInitialDisclosureDue(applicationDate, days)) {
                 if (validFolderIds.length() > 0) {
                     validFolderIds += ", ";
                 }
                 validFolderIds += folderId;
-            }
             }
         }
     }
