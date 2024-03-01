@@ -55,3 +55,56 @@ function boolean isInitialDisclosureDue(String applicationDate, int days) {
 
     return initialDisclosureDueDate.isEqual(LocalDate.now());
 }
+
+
+function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, int days) {
+
+    String applicationDate = "";
+    String folderId = "";
+    String validFolderIds = "";
+
+    for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
+        String ruleName = rulesData.getRuleName();
+
+        if ("InitialDisclosure".equals(ruleName)) {
+            List<String> rulesDataList = rulesData.getRuleDataList();
+
+            for (String ruleData : rulesDataList) {
+                String[] keyValue = ruleData.split("\\|");
+
+                if (keyValue.length == 2) {
+                    String key = keyValue[0];
+                    String value = keyValue[1];
+
+                    if ("FolderId".equals(key)) {
+                        folderId = value;
+                    }
+                    if ("ApplicationDate".equals(key)) {
+                        applicationDate = value;
+                    }
+                }
+                if (applicationDate.length() > 0 && folderId.length() > 0 && isInitialDisclosureDue(applicationDate, days)) {
+                    if (validFolderIds.length() > 0) {
+                        validFolderIds += ",";
+                    }
+                    validFolderIds += folderId;
+                    folderId = "";
+                    applicationDate = "";
+                }
+            }
+        }
+    }
+
+    return validFolderIds;
+}
+
+
+function boolean isInitialDisclosureDue(String applicationDate, int days) {
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    LocalDate applicationLocalDate = LocalDate.parse(applicationDate, formatter);
+
+    LocalDate initialDisclosureDueDate = applicationLocalDate.plusDays(days);
+
+    return initialDisclosureDueDate.isEqual(LocalDate.now());
+}
