@@ -4,6 +4,10 @@ import java.lang.Number;
 
 rule "grl_loan_expires_today"
 	dialect "mvel"
+	agenda-group "lock_expiring_today"
 	when
+		For trigger event
+		If loan expires today
 	then
+		Send notifications for the Loans to be Expired Today
 end
