@@ -13,3 +13,16 @@
 		       
 [consequence][]Send notifications for the Loans to be Disclosed in two days =
                $ruleValidationResult.setValidationResult(retrieveApplicationDateAndFolderName($rulesDataDto, 0));
+               
+[condition][]If loan expires today = eval(fetchExpiryDueFolderIds($rulesDataDto, 0).length() > 0)
+[condition][]If loan expires in one day = eval(fetchExpiryDueFolderIds($rulesDataDto, 1).length() > 0)
+[condition][]If loan expires in two days = eval(fetchExpiryDueFolderIds($rulesDataDto, 2).length() > 0)
+
+[consequence][]Send notifications for the Loans to be Expired Today =
+               $ruleValidationResult.setValidationResult(fetchExpiryDueFolderIds($rulesDataDto, 0));               
+
+[consequence][]Send notifications for the Loans to be Expired in one day =
+               $ruleValidationResult.setValidationResult(fetchExpiryDueFolderIds($rulesDataDto, 1));               
+		       
+[consequence][]Send notifications for the Loans to be Expired in two days =
+               $ruleValidationResult.setValidationResult(fetchExpiryDueFolderIds($rulesDataDto, 2));               
