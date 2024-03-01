@@ -83,7 +83,7 @@ function String fetchExpiryDueFolderIds(RulesDataDto rulesDataDto, int days) {
                         expDate = value;
                     }
                 }
-                if (expDate.length() > 0 && folderId.length() > 0 && isInitialDisclosureDue(expDate, days)) {
+                if (expDate.length() > 0 && folderId.length() > 0 && isExpiryDue(expDate, days)) {
                     if (validFolderIds.length() > 0) {
                         validFolderIds += ",";
                     }
