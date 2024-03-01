@@ -1,0 +1,9 @@
+package com.brimmatech.businesseventrules;
+
+import java.lang.Number;
+
+rule "grl_loan_expires_today"
+	dialect "mvel"
+	when
+	then
+end
