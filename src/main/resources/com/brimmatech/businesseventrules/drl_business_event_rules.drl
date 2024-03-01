@@ -57,16 +57,16 @@ function boolean isInitialDisclosureDue(String applicationDate, int days) {
 }
 
 
-function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, int days) {
+function String fetchExpiryDueFolderIds(RulesDataDto rulesDataDto, int days) {
 
-    String applicationDate = "";
+    String expDate = "";
     String folderId = "";
     String validFolderIds = "";
 
     for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
         String ruleName = rulesData.getRuleName();
 
-        if ("InitialDisclosure".equals(ruleName)) {
+        if ("LockExpiry".equals(ruleName)) {
             List<String> rulesDataList = rulesData.getRuleDataList();
 
             for (String ruleData : rulesDataList) {
@@ -79,17 +79,17 @@ function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, 
                     if ("FolderId".equals(key)) {
                         folderId = value;
                     }
-                    if ("ApplicationDate".equals(key)) {
-                        applicationDate = value;
+                    if ("LockExpDate".equals(key)) {
+                        expDate = value;
                     }
                 }
-                if (applicationDate.length() > 0 && folderId.length() > 0 && isInitialDisclosureDue(applicationDate, days)) {
+                if (expDate.length() > 0 && folderId.length() > 0 && isInitialDisclosureDue(expDate, days)) {
                     if (validFolderIds.length() > 0) {
                         validFolderIds += ",";
                     }
                     validFolderIds += folderId;
                     folderId = "";
-                    applicationDate = "";
+                    expDate = "";
                 }
             }
         }
@@ -99,12 +99,12 @@ function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, 
 }
 
 
-function boolean isInitialDisclosureDue(String applicationDate, int days) {
+function boolean isExpiryDue(String expDate, int days) {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    LocalDate applicationLocalDate = LocalDate.parse(applicationDate, formatter);
+    LocalDate expiryLocalDate = LocalDate.parse(expDate, formatter);
 
-    LocalDate initialDisclosureDueDate = applicationLocalDate.plusDays(days);
+    LocalDate expiryDueDate = expiryLocalDate.minusDays(days);
 
-    return initialDisclosureDueDate.isEqual(LocalDate.now());
+    return expiryDueDate.isEqual(LocalDate.now());
 }
