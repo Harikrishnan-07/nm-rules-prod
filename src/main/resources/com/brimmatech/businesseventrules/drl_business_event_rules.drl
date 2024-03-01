@@ -30,12 +30,14 @@ function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, 
                         applicationDate = value;
                     }
                 }
-            }
-            if (applicationDate.length() > 0 && folderId.length() > 0 && isInitialDisclosureDue(applicationDate, days)) {
+                if (applicationDate.length() > 0 && folderId.length() > 0 && isInitialDisclosureDue(applicationDate, days)) {
                 if (validFolderIds.length() > 0) {
                     validFolderIds += ",";
                 }
                 validFolderIds += folderId;
+                folderId = "";
+                applicationDate = "";
+            }
             }
         }
     }
