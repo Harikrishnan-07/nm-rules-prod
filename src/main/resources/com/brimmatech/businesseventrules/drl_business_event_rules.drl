@@ -33,7 +33,7 @@ function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, 
             }
             if (applicationDate.length() > 0 && folderId.length() > 0 && isInitialDisclosureDue(applicationDate, days)) {
                 if (validFolderIds.length() > 0) {
-                    validFolderIds += ", ";
+                    validFolderIds += ",";
                 }
                 validFolderIds += folderId;
             }
