@@ -9,6 +9,8 @@ import java.time.DayOfWeek;
 function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, int days) {
 
     String validFolderIds = "";
+    String applicationDate = "";
+    String folderId = "";
     
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     
@@ -36,9 +38,6 @@ function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, 
 
             for (String ruleData : rulesDataList) {
                 String[] keyValue = ruleData.split("\\|");
-                
-                String applicationDate = "";
-                String folderId = "";
 
                 if (keyValue.length == 2) {
                     String key = keyValue[0];
@@ -61,6 +60,8 @@ function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, 
                     }
                     
                     validFolderIds += folderId;
+                    folderId = "";
+                    applicationDate = "";
                 }
             }
         }
