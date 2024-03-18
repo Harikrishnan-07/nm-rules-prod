@@ -27,9 +27,9 @@
 [consequence][]Send notifications for the Loans to be Expired in two days =
                $ruleValidationResult.setValidationResult(fetchExpiryDueFolderIds($rulesDataDto, 2));               
                
-[condition][]If loan lock request submitted = eval(fetchFolderIdsOnLockRequest($rulesDataDto, "2").length() > 0)
-[condition][]If loan lock request approved = eval(fetchFolderIdsOnLockRequest($rulesDataDto, "3").length() > 0)
+[condition][]If loan lock request submitted = eval(fetchFolderIdsOnLockRequest($rulesDataDto, 2).length() > 0)
+[condition][]If loan lock request approved = eval(fetchFolderIdsOnLockRequest($rulesDataDto, 3).length() > 0)
 
-[consequence][]Send notifications for the Loan lock request submitted = $ruleValidationResult.setValidationResult(fetchFolderIdsOnLockRequest($rulesDataDto, "2"));
+[consequence][]Send notifications for the Loan lock request submitted = $ruleValidationResult.setValidationResult(fetchFolderIdsOnLockRequest($rulesDataDto, 2));
 
-[consequence][]Send notifications for the Loan lock request approved = $ruleValidationResult.setValidationResult(fetchFolderIdsOnLockRequest($rulesDataDto, "3"));
+[consequence][]Send notifications for the Loan lock request approved = $ruleValidationResult.setValidationResult(fetchFolderIdsOnLockRequest($rulesDataDto, 3));
