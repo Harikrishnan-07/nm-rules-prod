@@ -158,7 +158,7 @@ function int calculateElapsedBusinessDays(LocalDate start, LocalDate end, int of
     return count;
 }
 
-function String fetchFolderIdsOnLockRequest(RulesDataDto rulesDataDto, String lockAction) {
+function String fetchFolderIdsOnLockRequest(RulesDataDto rulesDataDto, int lockAction) {
 
     String lock = "";
     String folderId = "";
@@ -185,7 +185,7 @@ function String fetchFolderIdsOnLockRequest(RulesDataDto rulesDataDto, String lo
                     }
                 }
             }
-            if (lock.length() > 0 && folderId.length() > 0 && lock.equals(lockAction)) {
+            if (lock.length() > 0 && folderId.length() > 0 && Integer.parseInt(lock) == lockAction) {
                 if (validFolderIds.length() > 0) {
                     validFolderIds += ", ";
                 }
