@@ -31,7 +31,7 @@
 [condition][]If loan lock req approved = eval(fetchFolderIdsOnLockRequest($rulesDataDto, 3).length() > 0)
 
 [consequence][]Send notifications for the Loan lock request submitted =
-               $ruleValidationResult.setValidationResult(fetchFolderIdsOnLockRequest($rulesDataDto, 2));               
+               $ruleValidationResult.setValidationResult(fetchFolderIdsOnLockRequest($rulesDataDto, "2"));               
 
 [consequence][]Send notifications for the Loan lock request approved =
-               $ruleValidationResult.setValidationResult(fetchFolderIdsOnLockRequest($rulesDataDto, 3));               
+               $ruleValidationResult.setValidationResult(fetchFolderIdsOnLockRequest($rulesDataDto, "3"));               
