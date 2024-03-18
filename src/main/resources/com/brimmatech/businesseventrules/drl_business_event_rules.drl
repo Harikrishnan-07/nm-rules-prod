@@ -158,7 +158,7 @@ function int calculateElapsedBusinessDays(LocalDate start, LocalDate end, int of
     return count;
 }
 
-String fetchFolderIdsOnLockRequest(RulesDataDto rulesDataDto, String lockAction) {
+function String fetchFolderIdsOnLockRequest(RulesDataDto rulesDataDto, String lockAction) {
 
     String lock = "";
     String folderId = "";
