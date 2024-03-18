@@ -157,3 +157,42 @@ function int calculateElapsedBusinessDays(LocalDate start, LocalDate end, int of
     
     return count;
 }
+
+String fetchFolderIdsOnLockRequest(RulesDataDto rulesDataDto, String lockAction) {
+
+    String lock = "";
+    String folderId = "";
+    String validFolderIds = "";
+
+    for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
+        String ruleName = rulesData.getRuleName();
+
+        if ("LockRequest".equals(ruleName)) {
+            List<String> rulesDataList = rulesData.getRuleDataList();
+
+            for (String ruleData : rulesDataList) {
+                String[] keyValue = ruleData.split("\\|");
+
+                if (keyValue.length == 2) {
+                    String key = keyValue[0];
+                    String value = keyValue[1];
+
+                    if ("FolderId".equals(key)) {
+                        folderId = value;
+                    }
+                    if ("Lock".equals(key)) {
+                        lock = value;
+                    }
+                }
+            }
+            if (lock.length() > 0 && folderId.length() > 0 && lock.equals(lockAction)) {
+                if (validFolderIds.length() > 0) {
+                    validFolderIds += ", ";
+                }
+                validFolderIds += folderId;
+            }
+        }
+    }
+
+    return validFolderIds;
+}
