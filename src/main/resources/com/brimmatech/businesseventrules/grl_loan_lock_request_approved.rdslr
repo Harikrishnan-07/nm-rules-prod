@@ -4,6 +4,10 @@ import java.lang.Number;
 
 rule "grl_loan_lock_request_approved"
 	dialect "mvel"
+	agenda-group "lock_req_approved"
 	when
+		For trigger event
+		If loan lock req approved
 	then
+		Send notifications for the Loan lock request approved
 end
