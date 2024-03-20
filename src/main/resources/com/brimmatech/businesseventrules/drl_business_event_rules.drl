@@ -284,7 +284,7 @@ function String fetchFolderIdsLockDisclosureDue(RulesDataDto rulesDataDto, int d
                 }
                 
                 if (rateDate.length() > 0 && folderId.length() > 0 
-                    && isInitialDisclosureDue(applicationDate, days, holidays, excludedDaysOfWeek, formatter)) {
+                    && isInitialDisclosureDue(rateDate, days, holidays, excludedDaysOfWeek, formatter)) {
                     
                     if (validFolderIds.length() > 0) {
                         validFolderIds += ",";
