@@ -4,6 +4,10 @@ import java.lang.Number;
 
 rule "grl_lock_disclosure_due_in_one_day"
 	dialect "mvel"
+	agenda-group "lock_disclosure_due_one_day"
 	when
+		For trigger event
+		If lock disclosure due in one day
 	then
+		Send notifications for lock disclosures due in one day
 end
