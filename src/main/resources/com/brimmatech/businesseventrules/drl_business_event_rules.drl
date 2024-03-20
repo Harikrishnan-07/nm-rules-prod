@@ -228,7 +228,6 @@ function String fetchFolderIdsAffiliate(RulesDataDto rulesDataDto) {
                     
                     validFolderIds += folderId;
                     folderId = "";
-                    applicationDate = "";
                 }
             }
         }
