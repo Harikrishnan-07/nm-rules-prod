@@ -4,6 +4,10 @@ import java.lang.Number;
 
 rule "grl_affiliate"
 	dialect "mvel"
+	agenda-group "affiliate"
 	when
+		For trigger event
+		If possible affiliate exists
 	then
+		Send notifications for possible affiliate
 end
