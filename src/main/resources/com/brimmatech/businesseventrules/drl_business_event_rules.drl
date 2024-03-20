@@ -196,3 +196,114 @@ function String fetchFolderIdsOnLockRequest(RulesDataDto rulesDataDto, int lockA
 
     return validFolderIds;
 }
+
+function String fetchFolderIdsAffiliate(RulesDataDto rulesDataDto) {
+    
+    String validFolderIds = "";
+    String folderId = "";
+    
+    for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
+        String ruleName = rulesData.getRuleName();
+
+        if ("Affiliate".equals(ruleName)) {
+            List<String> rulesDataList = rulesData.getRuleDataList();
+
+            for (String ruleData : rulesDataList) {
+                String[] keyValue = ruleData.split("\\|");
+
+                if (keyValue.length == 1) {
+                    String key = keyValue[0];
+                    String value = keyValue[1];
+
+                    if ("FolderId".equals(key)) {
+                        folderId = value;
+                    }
+                }
+                
+                if (folderId.length() > 0) {
+                    
+                    if (validFolderIds.length() > 0) {
+                        validFolderIds += ",";
+                    }
+                    
+                    validFolderIds += folderId;
+                    folderId = "";
+                    applicationDate = "";
+                }
+            }
+        }
+    }
+    
+    return validFolderIds;
+}
+
+function String fetchFolderIdsLockDisclosureDue(RulesDataDto rulesDataDto, int days) {
+
+    String validFolderIds = "";
+    String rateDate = "";
+    String folderId = "";
+    
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    
+    LocalDate[] holidays = new LocalDate[] {
+        LocalDate.parse("01/01/2024", formatter),
+        LocalDate.parse("01/15/2024", formatter),
+        LocalDate.parse("05/27/2024", formatter),
+        LocalDate.parse("06/19/2024", formatter),
+        LocalDate.parse("07/04/2024", formatter),
+        LocalDate.parse("09/02/2024", formatter),
+        LocalDate.parse("11/11/2024", formatter),
+        LocalDate.parse("11/28/2024", formatter),
+        LocalDate.parse("11/29/2024", formatter),
+        LocalDate.parse("12/24/2024", formatter),
+        LocalDate.parse("12/25/2024", formatter)
+    };
+    
+    DayOfWeek[] excludedDaysOfWeek =  new DayOfWeek[] { DayOfWeek.SUNDAY };
+
+    for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
+        String ruleName = rulesData.getRuleName();
+
+        if ("LockDisclosure".equals(ruleName)) {
+            List<String> rulesDataList = rulesData.getRuleDataList();
+
+            for (String ruleData : rulesDataList) {
+                String[] keyValue = ruleData.split("\\|");
+
+                if (keyValue.length == 2) {
+                    String key = keyValue[0];
+                    String value = keyValue[1];
+
+                    if ("FolderId".equals(key)) {
+                        folderId = value;
+                    }
+                    
+                    if ("RateDate".equals(key)) {
+                        rateDate = value;
+                    }
+                }
+                
+                if (rateDate.length() > 0 && folderId.length() > 0 
+                    && isInitialDisclosureDue(applicationDate, days, holidays, excludedDaysOfWeek, formatter)) {
+                    
+                    if (validFolderIds.length() > 0) {
+                        validFolderIds += ",";
+                    }
+                    
+                    validFolderIds += folderId;
+                    folderId = "";
+                    applicationDate = "";
+                }
+            }
+        }
+    }
+
+    return validFolderIds;
+}
+
+function boolean isLockDisclosureDue(String rateDate, int days, LocalDate[] holidays, DayOfWeek[] excludedDaysOfWeek, DateTimeFormatter formatter) {
+
+    LocalDate start = LocalDate.parse(rateDate, formatter);
+
+    return calculateElapsedBusinessDays(start, LocalDate.now(), 1, holidays, excludedDaysOfWeek) == days;
+}
