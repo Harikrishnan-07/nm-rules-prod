@@ -291,7 +291,7 @@ function String fetchFolderIdsLockDisclosureDue(RulesDataDto rulesDataDto, int d
                     
                     validFolderIds += folderId;
                     folderId = "";
-                    applicationDate = "";
+                    rateDate = "";
                 }
             }
         }
