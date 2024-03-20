@@ -35,3 +35,16 @@
 
 [consequence][]Send notifications for the Loan lock request approved =
                $ruleValidationResult.setValidationResult(fetchFolderIdsOnLockRequest($rulesDataDto, 3));               
+               
+
+[condition][]If possible affiliate exists = eval(fetchFolderIdsAffiliate($rulesDataDto).length() > 0)
+[consequence][]Send notifications for possible affiliate = 
+               $ruleValidationResult.setValidationResult(fetchFolderIdsAffiliate($rulesDataDto));
+               
+[condition][]If lock disclosure due in one day = eval(fetchFolderIdsLockDisclosureDue($rulesDataDto, 2).length() > 0)
+[condition][]If lock disclosure due today = eval(fetchFolderIdsLockDisclosureDue($rulesDataDto, 3).length() > 0)
+
+[consequece][]Send notifications for lock disclosures due in one day =
+               $ruleValidationResult.setValidationResult(fetchFolderIdsLockDisclosureDue($rulesDataDto, 2)); 
+[consequece][]Send notifications for lock disclosures due today =
+               $ruleValidationResult.setValidationResult(fetchFolderIdsLockDisclosureDue($rulesDataDto, 3)); 
