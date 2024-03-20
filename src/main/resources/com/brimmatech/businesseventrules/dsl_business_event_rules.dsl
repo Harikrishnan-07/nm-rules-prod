@@ -44,7 +44,7 @@
 [condition][]If lock disclosure due in one day = eval(fetchFolderIdsLockDisclosureDue($rulesDataDto, 2).length() > 0)
 [condition][]If lock disclosure due today = eval(fetchFolderIdsLockDisclosureDue($rulesDataDto, 3).length() > 0)
 
-[consequece][]Send notifications for lock disclosures due in one day =
+[consequence][]Send notifications for lock disclosures due in one day =
                $ruleValidationResult.setValidationResult(fetchFolderIdsLockDisclosureDue($rulesDataDto, 2)); 
-[consequece][]Send notifications for lock disclosures due today =
+[consequence][]Send notifications for lock disclosures due today =
                $ruleValidationResult.setValidationResult(fetchFolderIdsLockDisclosureDue($rulesDataDto, 3)); 
