@@ -89,5 +89,3 @@ function boolean isCreditDecisionDue(String applicationDate, int days, LocalDate
 
     return end.isEqual(LocalDate.now());
 }
-
-}
