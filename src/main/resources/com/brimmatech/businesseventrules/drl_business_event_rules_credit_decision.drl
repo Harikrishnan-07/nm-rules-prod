@@ -48,7 +48,8 @@ function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, in
                     }
                     
                     if ("ApplicationDate".equals(key)) {
-                        applicationDate = value;
+                        //applicationDate = value;
+                        applicationDate = LocalDate.parse(value, formatter);
                     }
                 }
                 
