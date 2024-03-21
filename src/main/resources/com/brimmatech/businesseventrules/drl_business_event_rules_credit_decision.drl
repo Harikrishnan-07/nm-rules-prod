@@ -55,7 +55,6 @@ function LocalDate parseApplicationDate(String value, DateTimeFormatter formatte
     try {
         return LocalDate.parse(value, formatter);
     } catch (Exception e) {
-        // If parsing with time fails, try parsing without time
         return LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
     }
 }
