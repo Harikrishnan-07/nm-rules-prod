@@ -78,30 +78,3 @@ function boolean isCreditDecisionDue(String applicationDate, int days, LocalDate
 
     return calculateElapsedBusinessDays(start, LocalDate.now(), 1, holidays, excludedDaysOfWeek) == days;
 }
-
-
-function int calculateElapsedBusinessDays(LocalDate start, LocalDate end, int offset,
-        LocalDate[] holidays, DayOfWeek[] excludedDaysOfWeek) {
-            
-    if (excludedDaysOfWeek == null) {
-        excludedDaysOfWeek = new DayOfWeek[] {};
-    }
-    
-    int count = 0;
-    
-    start = start.plusDays(offset);
-    
-    while (!start.isAfter(end) && count < 10) {
-        
-        if (!Arrays.stream(holidays).anyMatch(start::equals)
-                && !Arrays.stream(excludedDaysOfWeek).anyMatch(start.getDayOfWeek()::equals)) {
-                    
-            count++;
-            
-        }
-        
-        start = start.plusDays(1);
-    }
-    
-    return count;
-}
