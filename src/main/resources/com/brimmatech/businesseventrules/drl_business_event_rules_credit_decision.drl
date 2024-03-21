@@ -47,7 +47,7 @@ function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, in
                 }
                 
                 if (applicationDate.length() > 0 && folderId.length() > 0 
-                    && isCreditDecisionDue(applicationDate, days, holidays, excludedDaysOfWeek, formatter)) {
+                    && isCreditDecisionDue(applicationDate, days, formatter)) {
                     
                     if (validFolderIds.length() > 0) {
                         validFolderIds += ",";
