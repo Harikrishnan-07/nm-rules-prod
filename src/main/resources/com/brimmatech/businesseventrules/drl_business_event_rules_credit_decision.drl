@@ -54,15 +54,13 @@ function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, in
                         LocalDate parsedDate = null;
 
                         try {
-                            parsedDate = LocalDate.parse(inputDate, withTimeFormatter);
+                            parsedDate = LocalDate.parse(value, withTimeFormatter);
                         } catch (Exception e) {
-                            parsedDate = LocalDate.parse(inputDate, withoutTimeFormatter);
+                            parsedDate = LocalDate.parse(value, withoutTimeFormatter);
                         }
 
                         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-                        String tempApplicationDate = parsedDate.format(outputFormatter);
-
-                        applicationDate = LocalDate.parse(value, formatter);
+                        applicationDate = parsedDate.format(outputFormatter);
                     }
                 }
                 
