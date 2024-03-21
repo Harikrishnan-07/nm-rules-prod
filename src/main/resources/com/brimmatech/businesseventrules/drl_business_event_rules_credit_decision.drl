@@ -3,18 +3,14 @@ package com.brimmatech.businesseventrules;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Arrays;
-import java.time.DayOfWeek;
 
 function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int days) {
 
     String validFolderIds = "";
-    String applicationDate = "";
-    String folderId = "";
-    
+
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     DateTimeFormatter withTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ssa");
-    
+
     for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
         String ruleName = rulesData.getRuleName();
 
@@ -29,33 +25,19 @@ function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, in
                     String value = keyValue[1];
 
                     if ("FolderId".equals(key)) {
-                        folderId = value;
-                    }
-                    
-                    if ("ApplicationDate".equals(key)) {
-                        //applicationDate = value;
-                        LocalDate parsedDate = null;
+                        String folderId = value;
 
-                        try {
-                            parsedDate = LocalDate.parse(value, withTimeFormatter);
-                        } catch (Exception e) {
-                            parsedDate = LocalDate.parse(value, formatter);
+                        // Fetch and format ApplicationDate
+                        LocalDate applicationDate = parseApplicationDate(value, withTimeFormatter);
+                        
+                        // Check if credit decision is due
+                        if (isCreditDecisionDue(applicationDate, days)) {
+                            if (!validFolderIds.isEmpty()) {
+                                validFolderIds += ",";
+                            }
+                            validFolderIds += folderId;
                         }
-
-                        applicationDate = parsedDate.format(formatter);
                     }
-                }
-                
-                if (applicationDate.length() > 0 && folderId.length() > 0 
-                    && isCreditDecisionDue(applicationDate, days, formatter)) {
-                    
-                    if (validFolderIds.length() > 0) {
-                        validFolderIds += ",";
-                    }
-                    
-                    validFolderIds += folderId;
-                    folderId = "";
-                    applicationDate = "";
                 }
             }
         }
@@ -64,12 +46,16 @@ function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, in
     return validFolderIds;
 }
 
-
-function boolean isCreditDecisionDue(String applicationDate, int days, DateTimeFormatter formatter) {
-
-    LocalDate start = LocalDate.parse(applicationDate, formatter);
-
-    LocalDate end = start.plusDays(days);
-
+function boolean isCreditDecisionDue(LocalDate applicationDate, int days) {
+    LocalDate end = applicationDate.plusDays(days);
     return end.isEqual(LocalDate.now());
+}
+
+function LocalDate parseApplicationDate(String value, DateTimeFormatter formatter) {
+    try {
+        return LocalDate.parse(value, formatter);
+    } catch (Exception e) {
+        // If parsing with time fails, try parsing without time
+        return LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+    }
 }
