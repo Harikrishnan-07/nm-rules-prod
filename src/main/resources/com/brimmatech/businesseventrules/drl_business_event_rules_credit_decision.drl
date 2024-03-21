@@ -14,7 +14,6 @@ function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, in
     
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     DateTimeFormatter withTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ssa");
-	DateTimeFormatter withoutTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     
     LocalDate[] holidays = new LocalDate[] {
         LocalDate.parse("01/01/2024", formatter),
@@ -56,11 +55,10 @@ function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, in
                         try {
                             parsedDate = LocalDate.parse(value, withTimeFormatter);
                         } catch (Exception e) {
-                            parsedDate = LocalDate.parse(value, withoutTimeFormatter);
+                            parsedDate = LocalDate.parse(value, formatter);
                         }
 
-                        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-                        applicationDate = parsedDate.format(outputFormatter);
+                        applicationDate = parsedDate.format(formatter);
                     }
                 }
                 
