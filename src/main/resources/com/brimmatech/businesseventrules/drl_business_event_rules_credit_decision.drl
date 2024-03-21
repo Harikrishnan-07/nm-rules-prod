@@ -1,2 +1,107 @@
 package com.brimmatech.businesseventrules;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Arrays;
+import java.time.DayOfWeek;
+
+function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int days) {
+
+    String validFolderIds = "";
+    String applicationDate = "";
+    String folderId = "";
+    
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    
+    LocalDate[] holidays = new LocalDate[] {
+        LocalDate.parse("01/01/2024", formatter),
+        LocalDate.parse("01/15/2024", formatter),
+        LocalDate.parse("05/27/2024", formatter),
+        LocalDate.parse("06/19/2024", formatter),
+        LocalDate.parse("07/04/2024", formatter),
+        LocalDate.parse("09/02/2024", formatter),
+        LocalDate.parse("11/11/2024", formatter),
+        LocalDate.parse("11/28/2024", formatter),
+        LocalDate.parse("11/29/2024", formatter),
+        LocalDate.parse("12/24/2024", formatter),
+        LocalDate.parse("12/25/2024", formatter)
+    };
+    
+    DayOfWeek[] excludedDaysOfWeek =  new DayOfWeek[] { DayOfWeek.SUNDAY };
+
+    for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
+        String ruleName = rulesData.getRuleName();
+
+        if ("CreditDecision".equals(ruleName)) {
+            List<String> rulesDataList = rulesData.getRuleDataList();
+
+            for (String ruleData : rulesDataList) {
+                String[] keyValue = ruleData.split("\\|");
+
+                if (keyValue.length == 2) {
+                    String key = keyValue[0];
+                    String value = keyValue[1];
+
+                    if ("FolderId".equals(key)) {
+                        folderId = value;
+                    }
+                    
+                    if ("ApplicationDate".equals(key)) {
+                        applicationDate = value;
+                    }
+                }
+                
+                if (applicationDate.length() > 0 && folderId.length() > 0 
+                    && isCreditDecisionDue(applicationDate, days, holidays, excludedDaysOfWeek, formatter)) {
+                    
+                    if (validFolderIds.length() > 0) {
+                        validFolderIds += ",";
+                    }
+                    
+                    validFolderIds += folderId;
+                    folderId = "";
+                    applicationDate = "";
+                }
+            }
+        }
+    }
+
+    return validFolderIds;
+}
+
+
+function boolean isCreditDecisionDue(String applicationDate, int days, LocalDate[] holidays, DayOfWeek[] excludedDaysOfWeek, DateTimeFormatter formatter) {
+
+    LocalDate start = LocalDate.parse(applicationDate, formatter);
+
+
+    return calculateElapsedBusinessDays(start, LocalDate.now(), 1, holidays, excludedDaysOfWeek) == days;
+}
+
+
+function int calculateElapsedBusinessDays(LocalDate start, LocalDate end, int offset,
+        LocalDate[] holidays, DayOfWeek[] excludedDaysOfWeek) {
+            
+    if (excludedDaysOfWeek == null) {
+        excludedDaysOfWeek = new DayOfWeek[] {};
+    }
+    
+    int count = 0;
+    
+    start = start.plusDays(offset);
+    
+    while (!start.isAfter(end) && count < 10) {
+        
+        if (!Arrays.stream(holidays).anyMatch(start::equals)
+                && !Arrays.stream(excludedDaysOfWeek).anyMatch(start.getDayOfWeek()::equals)) {
+                    
+            count++;
+            
+        }
+        
+        start = start.plusDays(1);
+    }
+    
+    return count;
+}
