@@ -4,6 +4,10 @@ import java.lang.Number;
 
 rule "grl_credit_decision_due_today"
 	dialect "mvel"
+	agenda-group "credit_decision_due_today"
 	when
+		For trigger event
+		If credit decision due today
 	then
+		Send notifications for the Loans have credit decision due today
 end
