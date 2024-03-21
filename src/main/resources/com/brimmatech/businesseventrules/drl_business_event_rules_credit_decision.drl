@@ -8,68 +8,69 @@ import java.time.DayOfWeek;
 
 function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int days) {
 
-    String validFolderIds = "";
-    String applicationDate = "";
-    String folderId = "";
-    
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    
-    LocalDate[] holidays = new LocalDate[] {
-        LocalDate.parse("01/01/2024", formatter),
-        LocalDate.parse("01/15/2024", formatter),
-        LocalDate.parse("05/27/2024", formatter),
-        LocalDate.parse("06/19/2024", formatter),
-        LocalDate.parse("07/04/2024", formatter),
-        LocalDate.parse("09/02/2024", formatter),
-        LocalDate.parse("11/11/2024", formatter),
-        LocalDate.parse("11/28/2024", formatter),
-        LocalDate.parse("11/29/2024", formatter),
-        LocalDate.parse("12/24/2024", formatter),
-        LocalDate.parse("12/25/2024", formatter)
-    };
-    
-    DayOfWeek[] excludedDaysOfWeek =  new DayOfWeek[] { DayOfWeek.SUNDAY };
+        String validFolderIds = "";
+        String applicationDate = "";
+        String folderId = "";
+        
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ssa");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        
+        LocalDate[] holidays = new LocalDate[] {
+            LocalDate.parse("01/01/2024", outputFormatter),
+            LocalDate.parse("01/15/2024", outputFormatter),
+            LocalDate.parse("05/27/2024", outputFormatter),
+            LocalDate.parse("06/19/2024", outputFormatter),
+            LocalDate.parse("07/04/2024", outputFormatter),
+            LocalDate.parse("09/02/2024", outputFormatter),
+            LocalDate.parse("11/11/2024", outputFormatter),
+            LocalDate.parse("11/28/2024", outputFormatter),
+            LocalDate.parse("11/29/2024", outputFormatter),
+            LocalDate.parse("12/24/2024", outputFormatter),
+            LocalDate.parse("12/25/2024", outputFormatter)
+        };
+        
+        DayOfWeek[] excludedDaysOfWeek =  new DayOfWeek[] { DayOfWeek.SUNDAY };
 
-    for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
-        String ruleName = rulesData.getRuleName();
+        for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
+            String ruleName = rulesData.getRuleName();
 
-        if ("CreditDecision".equals(ruleName)) {
-            List<String> rulesDataList = rulesData.getRuleDataList();
+            if ("CreditDecision".equals(ruleName)) {
+                List<String> rulesDataList = rulesData.getRuleDataList();
 
-            for (String ruleData : rulesDataList) {
-                String[] keyValue = ruleData.split("\\|");
+                for (String ruleData : rulesDataList) {
+                    String[] keyValue = ruleData.split("\\|");
 
-                if (keyValue.length == 2) {
-                    String key = keyValue[0];
-                    String value = keyValue[1];
+                    if (keyValue.length == 2) {
+                        String key = keyValue[0];
+                        String value = keyValue[1];
 
-                    if ("FolderId".equals(key)) {
-                        folderId = value;
+                        if ("FolderId".equals(key)) {
+                            folderId = value;
+                        }
+                        
+                        if ("ApplicationDate".equals(key)) {
+                            // Parse datetime string to LocalDate and then format it to desired date format
+                            applicationDate = LocalDate.parse(value, inputFormatter).format(outputFormatter);
+                        }
                     }
                     
-                    if ("ApplicationDate".equals(key)) {
-                        //applicationDate = value;
-                        applicationDate = LocalDate.parse(value, formatter);
+                    if (applicationDate.length() > 0 && folderId.length() > 0 
+                        && isCreditDecisionDue(applicationDate, days, holidays, excludedDaysOfWeek, outputFormatter)) {
+                        
+                        if (validFolderIds.length() > 0) {
+                            validFolderIds += ",";
+                        }
+                        
+                        validFolderIds += folderId;
+                        folderId = "";
+                        applicationDate = "";
                     }
-                }
-                
-                if (applicationDate.length() > 0 && folderId.length() > 0 
-                    && isCreditDecisionDue(applicationDate, days, holidays, excludedDaysOfWeek, formatter)) {
-                    
-                    if (validFolderIds.length() > 0) {
-                        validFolderIds += ",";
-                    }
-                    
-                    validFolderIds += folderId;
-                    folderId = "";
-                    applicationDate = "";
                 }
             }
         }
-    }
 
-    return validFolderIds;
-}
+        return validFolderIds;
+    }
 
 
 function boolean isCreditDecisionDue(String applicationDate, int days, LocalDate[] holidays, DayOfWeek[] excludedDaysOfWeek, DateTimeFormatter formatter) {
