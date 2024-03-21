@@ -1,0 +1,9 @@
+package com.brimmatech.businesseventrules;
+
+import java.lang.Number;
+
+rule "grl_credit_decision_due_today"
+	dialect "mvel"
+	when
+	then
+end
