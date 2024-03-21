@@ -85,6 +85,9 @@ function boolean isCreditDecisionDue(String applicationDate, int days, LocalDate
 
     LocalDate start = LocalDate.parse(applicationDate, formatter);
 
+    LocalDate end = start.plusDays(days);
 
-    return calculateElapsedBusinessDays(start, LocalDate.now(), 1, holidays, excludedDaysOfWeek) == days;
+    return end.isEqual(LocalDate.now());
+}
+
 }
