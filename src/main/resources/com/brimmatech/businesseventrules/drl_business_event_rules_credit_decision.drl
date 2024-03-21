@@ -15,22 +15,6 @@ function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, in
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     DateTimeFormatter withTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ssa");
     
-    LocalDate[] holidays = new LocalDate[] {
-        LocalDate.parse("01/01/2024", formatter),
-        LocalDate.parse("01/15/2024", formatter),
-        LocalDate.parse("05/27/2024", formatter),
-        LocalDate.parse("06/19/2024", formatter),
-        LocalDate.parse("07/04/2024", formatter),
-        LocalDate.parse("09/02/2024", formatter),
-        LocalDate.parse("11/11/2024", formatter),
-        LocalDate.parse("11/28/2024", formatter),
-        LocalDate.parse("11/29/2024", formatter),
-        LocalDate.parse("12/24/2024", formatter),
-        LocalDate.parse("12/25/2024", formatter)
-    };
-    
-    DayOfWeek[] excludedDaysOfWeek =  new DayOfWeek[] { DayOfWeek.SUNDAY };
-
     for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
         String ruleName = rulesData.getRuleName();
 
@@ -81,7 +65,7 @@ function String retrieveFolderIdsForCreditDecision(RulesDataDto rulesDataDto, in
 }
 
 
-function boolean isCreditDecisionDue(String applicationDate, int days, LocalDate[] holidays, DayOfWeek[] excludedDaysOfWeek, DateTimeFormatter formatter) {
+function boolean isCreditDecisionDue(String applicationDate, int days, DateTimeFormatter formatter) {
 
     LocalDate start = LocalDate.parse(applicationDate, formatter);
 
