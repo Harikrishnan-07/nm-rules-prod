@@ -306,3 +306,12 @@ function boolean isLockDisclosureDue(String rateDate, int days, LocalDate[] holi
 
     return calculateElapsedBusinessDays(start, LocalDate.now(), 1, holidays, excludedDaysOfWeek) == days;
 }
+
+function boolean isCreditDecisionDue(String applicationDate, int days, LocalDate[] holidays, DayOfWeek[] excludedDaysOfWeek, DateTimeFormatter formatter) {
+    LocalDate start = LocalDate.parse(applicationDate, formatter);
+    LocalDate end = LocalDate.now();
+
+    int elapsedBusinessDays = calculateElapsedBusinessDays(start, end, 0, holidays, excludedDaysOfWeek);
+
+    return elapsedBusinessDays >= days;
+}
