@@ -53,16 +53,3 @@ function String getFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int day
 
         return validFolderIds;
     }
-
-function boolean isCreditDecisionDue(LocalDate applicationDate, int days) {
-    LocalDate end = applicationDate.plusDays(days);
-    return end.isEqual(LocalDate.now());
-}
-
-function LocalDate parseApplicationDate(String value, DateTimeFormatter formatter) {
-    try {
-        return LocalDate.parse(value, formatter);
-    } catch (Exception e) {
-        return LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-    }
-}
