@@ -1,2 +1,68 @@
 package com.brimmatech.businesseventrules;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+function String getFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int days) {
+
+        String validFolderIds = "";
+        String folderId = "";
+        String applicationDate = "";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter withTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ssa");
+
+        for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
+            String ruleName = rulesData.getRuleName();
+
+            if ("CreditDecision".equals(ruleName)) {
+                List<String> rulesDataList = rulesData.getRuleDataList();
+
+                for (String ruleData : rulesDataList) {
+                    String[] keyValue = ruleData.split("\\|");
+
+                    if (keyValue.length == 2) {
+                        String key = keyValue[0];
+                        String value = keyValue[1];
+
+                        if ("FolderId".equals(key)) {
+                            folderId = value;
+                        }
+
+                        if ("ApplicationDate".equals(key)) {
+                            applicationDate = value;
+                        }
+                    }
+                }
+
+                if (folderId.length() > 0 && applicationDate.length() > 0) {
+
+                    LocalDate tempApplicationDate = parseApplicationDate(applicationDate, withTimeFormatter);
+                    if (isCreditDecisionDue(tempApplicationDate, days)) {
+                        if (!validFolderIds.isEmpty()) {
+                            validFolderIds += ",";
+                        }
+                        validFolderIds += folderId;
+                        folderId = "";
+                        applicationDate = "";
+                    }
+                }
+            }
+        }
+
+        return validFolderIds;
+    }
+
+function boolean isCreditDecisionDue(LocalDate applicationDate, int days) {
+    LocalDate end = applicationDate.plusDays(days);
+    return end.isEqual(LocalDate.now());
+}
+
+function LocalDate parseApplicationDate(String value, DateTimeFormatter formatter) {
+    try {
+        return LocalDate.parse(value, formatter);
+    } catch (Exception e) {
+        return LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+    }
+}
