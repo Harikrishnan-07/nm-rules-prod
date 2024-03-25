@@ -7,7 +7,7 @@ rule "grl_credit_decision_due_in_3days"
 	agenda-group "credit_decision_due_3days"
 	when
 		For trigger event
-		If credit decision due in three days
+		If credit decision due in three day
 	then
-		Send notifications for the Loans have credit decision due in three days
+		Send notifications for the Loans with credit decision due in three days
 end
