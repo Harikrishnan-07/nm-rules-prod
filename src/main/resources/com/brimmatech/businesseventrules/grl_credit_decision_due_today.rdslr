@@ -9,5 +9,5 @@ rule "grl_credit_decision_due_today"
 		For trigger event
 		If credit decision due today
 	then
-		Send notifications for the Loans have credit decision due today
+		Send notifications for the Loans with credit decision due Today
 end
