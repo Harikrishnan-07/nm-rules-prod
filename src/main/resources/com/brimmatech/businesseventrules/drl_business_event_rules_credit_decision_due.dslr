@@ -51,3 +51,4 @@ function String getFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int day
 
     return validFolderIds;
 }
+    
