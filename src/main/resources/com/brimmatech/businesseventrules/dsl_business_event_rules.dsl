@@ -48,3 +48,8 @@
                $ruleValidationResult.setValidationResult(fetchFolderIdsLockDisclosureDue($rulesDataDto, 2)); 
 [consequence][]Send notifications for lock disclosures due today =
                $ruleValidationResult.setValidationResult(fetchFolderIdsLockDisclosureDue($rulesDataDto, 3)); 
+
+[condition][]If Respa application submitted = eval(getFolderIdsForRespaApplicationSubmitted($rulesDataDto).length() > 0)
+
+[consequence][]Send notifications for Respa application submitted =
+               $ruleValidationResult.setValidationResult(getFolderIdsForRespaApplicationSubmitted($rulesDataDto));
