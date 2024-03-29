@@ -52,3 +52,61 @@ function String getFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int day
     return validFolderIds;
 }
     
+    
+function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataDto, int days) {
+    String validFolderIds = "";
+    String folderId = "";
+    String applicationDate = "";
+    String beforeData = "";
+    String afterData = "";
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    DateTimeFormatter withTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ssa");
+
+    for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
+        String ruleName = rulesData.getRuleName();
+
+        if ("RespaApplication".equals(ruleName)) {
+            List<String> rulesDataList = rulesData.getRuleDataList();
+
+            for (String ruleData : rulesDataList) {
+                String[] keyValue = ruleData.split("\\|");
+
+                if (keyValue.length == 2) {
+                    String key = keyValue[0];
+                    String value = keyValue[1];
+
+                    if ("FolderId".equals(key)) {
+                        folderId = value;
+                    }
+
+                    if ("ApplicationDate".equals(key)) {
+                        applicationDate = value;
+                    }
+                    
+                    if ("beforeData".equals(key)) {
+                        beforeData = value;        
+                    }
+                    
+                    if ("afterData".equals(key)) {
+                        afterData = value;
+                    }
+                }
+
+                if (folderId.length() > 0 && applicationDate.length() > 0 && beforeData.length() == 0 && afterData.length() > 0)
+                {
+                        if (!validFolderIds.isEmpty()) {
+                            validFolderIds += ",";
+                        }
+                        validFolderIds += folderId;
+                        folderId = "";
+                        applicationDate = "";
+                        beforeData = "";
+                        afterData = "";
+                }
+            }
+        }
+    }
+
+    return validFolderIds;
+}    
