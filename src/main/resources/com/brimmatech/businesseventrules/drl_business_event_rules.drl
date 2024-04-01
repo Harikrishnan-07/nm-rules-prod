@@ -242,7 +242,8 @@ function String fetchFolderIdsLockDisclosureDue(RulesDataDto rulesDataDto, int d
     String rateDate = "";
     String folderId = "";
     
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
     
     LocalDate[] holidays = new LocalDate[] {
         LocalDate.parse("01/01/2024", formatter),
