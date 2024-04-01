@@ -246,17 +246,17 @@ function String fetchFolderIdsLockDisclosureDue(RulesDataDto rulesDataDto, int d
 	DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
     
     LocalDate[] holidays = new LocalDate[] {
-        LocalDate.parse("01/01/2024", formatter),
-        LocalDate.parse("01/15/2024", formatter),
-        LocalDate.parse("05/27/2024", formatter),
-        LocalDate.parse("06/19/2024", formatter),
-        LocalDate.parse("07/04/2024", formatter),
-        LocalDate.parse("09/02/2024", formatter),
-        LocalDate.parse("11/11/2024", formatter),
-        LocalDate.parse("11/28/2024", formatter),
-        LocalDate.parse("11/29/2024", formatter),
-        LocalDate.parse("12/24/2024", formatter),
-        LocalDate.parse("12/25/2024", formatter)
+        LocalDate.parse("01/01/2024", formatterDate),
+        LocalDate.parse("01/15/2024", formatterDate),
+        LocalDate.parse("05/27/2024", formatterDate),
+        LocalDate.parse("06/19/2024", formatterDate),
+        LocalDate.parse("07/04/2024", formatterDate),
+        LocalDate.parse("09/02/2024", formatterDate),
+        LocalDate.parse("11/11/2024", formatterDate),
+        LocalDate.parse("11/28/2024", formatterDate),
+        LocalDate.parse("11/29/2024", formatterDate),
+        LocalDate.parse("12/24/2024", formatterDate),
+        LocalDate.parse("12/25/2024", formatterDate)
     };
     
     DayOfWeek[] excludedDaysOfWeek =  new DayOfWeek[] { DayOfWeek.SUNDAY };
@@ -286,7 +286,7 @@ function String fetchFolderIdsLockDisclosureDue(RulesDataDto rulesDataDto, int d
                 }
                 
                 if (rateDate.length() > 0 && folderId.length() > 0 
-                    && isLockDisclosureDue(rateDate, days, holidays, excludedDaysOfWeek, formatter)) {
+                    && isLockDisclosureDue(rateDate, days, holidays, excludedDaysOfWeek, formatterDate)) {
                     
                     if (validFolderIds.length() > 0) {
                         validFolderIds += ",";
