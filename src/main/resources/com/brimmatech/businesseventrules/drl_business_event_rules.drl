@@ -211,7 +211,7 @@ function String fetchFolderIdsAffiliate(RulesDataDto rulesDataDto) {
             for (String ruleData : rulesDataList) {
                 String[] keyValue = ruleData.split("\\|");
 
-                if (keyValue.length == 1) {
+                if (keyValue.length == 2) {
                     String key = keyValue[0];
                     String value = keyValue[1];
 
