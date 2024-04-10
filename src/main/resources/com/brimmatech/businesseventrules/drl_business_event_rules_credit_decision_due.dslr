@@ -53,27 +53,24 @@ function String getFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int day
 }
     
     
-function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataDto) {
-    
-    String validFolderIds = "";
-    String folderId = "";
-    String applicationDate = "";
-    String beforeData = "";
-    String afterData = "";
+function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    DateTimeFormatter withTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ssa");
+        String validFolderIds = "";
+        String folderId = "";
+        String beforeData = "";
+        String afterData = "";
 
-    for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
-        String ruleName = rulesData.getRuleName();
+        for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
+            String ruleName = rulesData.getRuleName();
 
-        if ("RespaApplication".equals(ruleName)) {
-            List<String> rulesDataList = rulesData.getRuleDataList();
+            if ("RespaApplication".equals(ruleName)) {
+                List<String> rulesDataList = rulesData.getRuleDataList();
 
-            for (String ruleData : rulesDataList) {
-                String[] keyValue = ruleData.split("\\|");
+                for (String ruleData : rulesDataList) {
+                    String[] keyValue = ruleData.split("\\|");
 
                 if (keyValue.length == 2) {
+
                     String key = keyValue[0];
                     String value = keyValue[1];
 
@@ -81,29 +78,26 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
                         folderId = value;
                     }
 
-                    if ("ApplicationDate".equals(key)) {
-                        applicationDate = value;
-                    }
-                    
                     if ("beforeData".equals(key)) {
-                        beforeData = value;        
+                        beforeData = value;
                     }
-                    
+
                     if ("afterData".equals(key)) {
                         afterData = value;
                     }
                 }
 
-                if (folderId.length() > 0 && applicationDate.length() > 0 && beforeData.length() == 0 && afterData.length() > 0)
+                if (folderId.length() > 0 && beforeData.length() > 0
+                        && afterData.length() > 0 && validCdcPayloadData(beforeData, afterData))
                 {
-                        if (!validFolderIds.isEmpty()) {
-                            validFolderIds += ",";
-                        }
-                        validFolderIds += folderId;
-                        folderId = "";
-                        applicationDate = "";
-                        beforeData = "";
-                        afterData = "";
+
+                    if (!validFolderIds.isEmpty()) {
+                        validFolderIds += ",";
+                    }
+                    validFolderIds += folderId;
+                    folderId = "";
+                    beforeData = "";
+                    afterData = "";
                 }
             }
         }
@@ -111,3 +105,28 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
 
     return validFolderIds;
 }    
+
+function boolean validCdcPayloadData(String beforeData, String afterData) {
+
+    String[] keyValuePairsBeforeData = beforeData.substring(1, beforeData.length() - 1).split(", ");
+    String[] keyValuePairsAfterData = afterData.substring(1, afterData.length() - 1).split(", ");
+
+    Map<String, String> beforeMap = new HashMap<>();
+    Map<String, String> afterMap = new HashMap<>();
+
+    for (String pair : keyValuePairsBeforeData) {
+        String[] keyValueCdcData = pair.split("=");
+        beforeMap.put(keyValueCdcData[0], keyValueCdcData[1]);
+    }
+
+    for (String pair : keyValuePairsAfterData) {
+        String[] keyValueCdcData = pair.split("=");
+        afterMap.put(keyValueCdcData[0], keyValueCdcData[1]);
+    }
+
+    String beforeApplicationDate = beforeMap.get("applicationdate");
+    String afterApplicationDate = afterMap.get("applicationdate");
+
+    return (beforeApplicationDate.trim().equals("null") || beforeApplicationDate.trim().equals("")) && afterApplicationDate != null;
+
+}
