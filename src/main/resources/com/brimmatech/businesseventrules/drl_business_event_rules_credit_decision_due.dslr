@@ -85,11 +85,13 @@ function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
                     }
                 }
 
-                if (!folderId.isEmpty() && !oldData.isEmpty()
-                        && !updatedData.isEmpty() && validCdcPayloadData(oldData, updatedData)) {
+                if (!folderId.isEmpty() && !oldData.isEmpty() && !updatedData.isEmpty()) {
+                    if(validCdcPayloadData(oldData, updatedData)) {
+                        
+                    } else {
+                        folderId = "";
+                    }
                     break;
-                } else {
-                    folderId = "";
                 }
             }
         }
