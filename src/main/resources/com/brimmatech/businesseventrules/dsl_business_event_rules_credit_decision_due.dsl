@@ -10,3 +10,6 @@
 		       
 [consequence][]Send notifications for the Loans with credit decision due in ten days =
                $ruleValidationResult.setValidationResult(getFolderIdsForCreditDecision($rulesDataDto, 20));
+               
+[condition][]If Respa application submitted = eval(getFolderIdsForRespaApplication($rulesDataDto).length() > 0)
+[consequence][]Send notifications for Respa application submitted = $ruleValidationResult.setValidationResult(getFolderIdsForRespaApplication($rulesDataDto));               
