@@ -54,7 +54,7 @@ function String getFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int day
     
     
 function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
-    StringBuilder validFolderIds = new StringBuilder();
+    
     String folderId = "";
     String oldData = "";
     String updatedData = "";
@@ -87,19 +87,13 @@ function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
 
                 if (!folderId.isEmpty() && !oldData.isEmpty()
                         && !updatedData.isEmpty() && validCdcPayloadData(oldData, updatedData)) {
-                    if (validFolderIds.length() > 0) {
-                        validFolderIds.append(",");
-                    }
-                    validFolderIds.append(folderId);
-                    folderId = "";
-                    oldData = "";
-                    updatedData = "";
+                    break;
                 }
             }
         }
     }
 
-    return validFolderIds.toString();
+    return folderId;
 }
 
 function boolean validCdcPayloadData(String oldData, String updatedData) {
