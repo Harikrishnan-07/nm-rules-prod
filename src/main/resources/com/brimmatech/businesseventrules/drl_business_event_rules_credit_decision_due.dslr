@@ -103,8 +103,8 @@ function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
 }
 
 function boolean validCdcPayloadData(String oldData, String updatedData) {
-    String[] keyValuePairsBeforeData = oldData.substring(1, oldData.length() - 1).split(",");
-    String[] keyValuePairsAfterData = updatedData.substring(1, updatedData.length() - 1).split(",");
+    String[] keyValuePairsBeforeData = oldData.substring(1, oldData.length() - 1).split(", ");
+    String[] keyValuePairsAfterData = updatedData.substring(1, updatedData.length() - 1).split(", ");
 
     Map<String, String> oldMap = new HashMap<>();
     Map<String, String> updatedMap = new HashMap<>();
