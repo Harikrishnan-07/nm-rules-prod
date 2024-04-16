@@ -57,8 +57,8 @@ function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
 
         String validFolderIds = "";
         String folderId = "";
-        String beforeData = "";
-        String afterData = "";
+        String oldData = "";
+        String updatedData = "";
 
         for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
             String ruleName = rulesData.getRuleName();
@@ -79,16 +79,16 @@ function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
                     }
 
                     if ("beforeData".equals(key)) {
-                        beforeData = value;
+                        oldData = value;
                     }
 
                     if ("afterData".equals(key)) {
-                        afterData = value;
+                        updatedData = value;
                     }
                 }
 
-                if (folderId.length() > 0 && beforeData.length() > 0
-                        && afterData.length() > 0 && validCdcPayloadData(beforeData, afterData))
+                if (folderId.length() > 0 && oldData.length() > 0
+                        && updatedData.length() > 0 && validCdcPayloadData(oldData, updatedData))
                 {
 
                     if (!validFolderIds.isEmpty()) {
@@ -96,8 +96,8 @@ function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
                     }
                     validFolderIds += folderId;
                     folderId = "";
-                    beforeData = "";
-                    afterData = "";
+                    oldData = "";
+                    updatedData = "";
                 }
             }
         }
@@ -106,27 +106,27 @@ function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
     return validFolderIds;
 }    
 
-function boolean validCdcPayloadData(String beforeData, String afterData) {
+function boolean validCdcPayloadData(String oldData, String updatedData) {
 
-    String[] keyValuePairsBeforeData = beforeData.substring(1, beforeData.length() - 1).split(", ");
-    String[] keyValuePairsAfterData = afterData.substring(1, afterData.length() - 1).split(", ");
+    String[] keyValuePairsBeforeData = oldData.substring(1, oldData.length() - 1).split(", ");
+    String[] keyValuePairsAfterData = updatedData.substring(1, updatedData.length() - 1).split(", ");
 
-    Map<String, String> beforeMap = new HashMap<>();
-    Map<String, String> afterMap = new HashMap<>();
+    Map<String, String> oldMap = new HashMap<>();
+    Map<String, String> updatedMap = new HashMap<>();
 
     for (String pair : keyValuePairsBeforeData) {
         String[] keyValueCdcData = pair.split("=");
-        beforeMap.put(keyValueCdcData[0], keyValueCdcData[1]);
+        oldMap.put(keyValueCdcData[0], keyValueCdcData[1]);
     }
 
     for (String pair : keyValuePairsAfterData) {
         String[] keyValueCdcData = pair.split("=");
-        afterMap.put(keyValueCdcData[0], keyValueCdcData[1]);
+        updatedMap.put(keyValueCdcData[0], keyValueCdcData[1]);
     }
 
-    String beforeApplicationDate = beforeMap.get("applicationdate");
-    String afterApplicationDate = afterMap.get("applicationdate");
+    String oldApplicationDate = oldMap.get("applicationdate");
+    String updatedApplicationDate = updatedMap.get("applicationdate");
 
-    return (beforeApplicationDate.trim().equals("null") || beforeApplicationDate.trim().equals("")) && afterApplicationDate != null;
+    return (oldApplicationDate.trim().equals("null") || oldApplicationDate.trim().equals("")) && updatedApplicationDate != null;
 
 }
