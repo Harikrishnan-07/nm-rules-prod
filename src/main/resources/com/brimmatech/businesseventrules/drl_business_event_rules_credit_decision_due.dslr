@@ -101,6 +101,9 @@ function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
 }
 
 function boolean validCdcPayloadData(String oldData, String updatedData) {
+    
+    boolean isValid = false;
+    
     String[] keyValuePairsBeforeData = oldData.substring(1, oldData.length() - 1).split(", ");
     String[] keyValuePairsAfterData = updatedData.substring(1, updatedData.length() - 1).split(", ");
 
@@ -119,6 +122,7 @@ function boolean validCdcPayloadData(String oldData, String updatedData) {
 
     String oldApplicationDate = oldMap.get("applicationdate");
     String updatedApplicationDate = updatedMap.get("applicationdate");
-
-    return (oldApplicationDate.equals("null") || oldApplicationDate.isEmpty()) && !updatedApplicationDate.equals("null");
+    
+    isValid = ((oldApplicationDate.equals("null") || oldApplicationDate.isEmpty()) && !updatedApplicationDate.equals("null"));
+    return isValid
 }
