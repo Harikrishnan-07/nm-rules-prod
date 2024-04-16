@@ -127,6 +127,6 @@ function boolean validCdcPayloadData(String oldData, String updatedData) {
     String oldApplicationDate = oldMap.get("applicationdate");
     String updatedApplicationDate = updatedMap.get("applicationdate");
 
-    return (oldApplicationDate.trim().equals("null") || oldApplicationDate.trim().equals("")) && updatedApplicationDate != null;
+    return (oldApplicationDate.trim().equals("null") || oldApplicationDate.trim().equals("")) && !updatedApplicationDate.trim().equals("null");
 
 }
