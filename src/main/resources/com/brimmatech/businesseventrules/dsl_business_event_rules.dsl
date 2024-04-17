@@ -63,4 +63,4 @@
                $ruleValidationResult.setValidationResult(getFolderIdsForCreditDecision($rulesDataDto, 20));
                
 [condition][]If Respa application submitted = eval(getFolderIdsForRespaApplication($rulesDataDto, 0).length() > 0)
-[consequence][]Send notifications for Respa application submitted = $ruleValidationResult.setValidationResult(getFolderIdsForRespaApplication($rulesDataDto));
+[consequence][]Send notifications for Respa application submitted = $ruleValidationResult.setValidationResult(getFolderIdsForRespaApplication($rulesDataDto, 0));
