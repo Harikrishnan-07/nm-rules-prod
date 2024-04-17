@@ -358,79 +358,64 @@ function String getFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int day
     return validFolderIds;
 }
     
-    
 function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataDto) {
-    
-    String folderId = "";
-    String oldData = "";
-    String updatedData = "";
 
-    for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
-        String ruleName = rulesData.getRuleName();
+        String folderId = "";
+        String oldData = "";
+        String updatedData = "";
 
-        if ("RespaApplication".equals(ruleName)) {
-            List<String> rulesDataList = rulesData.getRuleDataList();
+        for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
+            String ruleName = rulesData.getRuleName();
 
-            for (String ruleData : rulesDataList) {
-                String[] keyValue = ruleData.split("\\|");
+            if ("RespaApplication".equals(ruleName)) {
+                List<String> rulesDataList = rulesData.getRuleDataList();
 
-                if (keyValue.length == 2) {
-                    String key = keyValue[0];
-                    String value = keyValue[1];
+                for (String ruleData : rulesDataList) {
+                    String[] keyValue = ruleData.split("\\|");
 
-                    if ("FolderId".equals(key)) {
-                        folderId = value;
-                    } else if ("beforeData".equals(key)) {
-                        oldData = value;
-                    } else if ("afterData".equals(key)) {
-                        updatedData = value;
+                    if (keyValue.length == 2) {
+                        String key = keyValue[0];
+                        String value = keyValue[1];
+
+                        if ("FolderId".equals(key)) {
+                            folderId = value;
+                        } else if ("beforeData".equals(key)) {
+                            oldData = value;
+                        } else if ("afterData".equals(key)) {
+                            updatedData = value;
+                        }
                     }
-                }
 
-                if (!folderId.isEmpty() && !oldData.isEmpty() && !updatedData.isEmpty()) {
-                    if (!validCdcPayloadData(oldData, updatedData)) {
-                        folderId = "";
+                    if (!folderId.isEmpty() && !oldData.isEmpty() && !updatedData.isEmpty()) {
+                        if (!validCdcPayloadData(oldData, updatedData)) {
+                            folderId = "";
+                        }
+                        break;
                     }
-                    break;
                 }
             }
         }
+
+        return folderId;
     }
 
-    return folderId;
-}
+    function boolean validCdcPayloadData(String oldData, String updatedData) {
 
-function boolean validCdcPayloadData(String oldData, String updatedData) {
+        String oldApplicationDate = extractApplicationDate(oldData);
+        String updatedApplicationDate = extractApplicationDate(updatedData);
 
-    String oldApplicationDate = extractApplicationDate(oldData);
-    String updatedApplicationDate = extractApplicationDate(updatedData);
-    //return true;
-    return ((oldApplicationDate == null || oldApplicationDate.isEmpty()) && (updatedApplicationDate != null && !updatedApplicationDate.isEmpty()));
-    //return (oldApplicationDate.equals("null") || oldApplicationDate.isEmpty()) && !updatedApplicationDate.equals("null");
-}
+        return !"null".equals(updatedApplicationDate) && ("null".equals(oldApplicationDate) || oldApplicationDate.isEmpty());
+    }
 
-/*function String extractApplicationDate(String data) {
+    function String extractApplicationDate(String data) {
 
-    String[] keyValuePairs = data.substring(1, data.length() - 1).split(", ");
+        String[] keyValuePairs = data.substring(1, data.length() - 1).split(", ");
 
-    for (String pair : keyValuePairs) {
-        String[] keyValue = pair.split("=");
-        if ("applicationdate".equals(keyValue[0])) {
-            return keyValue[1];
+        for (String pair : keyValuePairs) {
+            String[] keyValue = pair.split("=");
+            if ("applicationdate".equals(keyValue[0])) {
+                return keyValue[1];
+            }
         }
+        return "";
     }
-    return "";
-}*/
-
-function String extractApplicationDate(String data) {
- 
-    String[] keyValuePairs = data.substring(1, data.length() - 1).split(", ");
-
-    for (String pair : keyValuePairs) {
-        String[] keyValue = pair.split("=");
-        if ("applicationdate".equals(keyValue[0])) {
-            return "null".equals(keyValue[1]) ? null : keyValue[1];
-        }
-    }
-    return null;
-}
