@@ -404,11 +404,12 @@ function boolean validCdcPayloadData(String oldData, String updatedData) {
 
     String oldApplicationDate = extractApplicationDate(oldData);
     String updatedApplicationDate = extractApplicationDate(updatedData);
-    return true;
+    //return true;
+    return (oldApplicationDate == null || oldApplicationDate.isEmpty()) && (updatedApplicationDate != null && !updatedApplicationDate.isEmpty());
     //return (oldApplicationDate.equals("null") || oldApplicationDate.isEmpty()) && !updatedApplicationDate.equals("null");
 }
 
-function String extractApplicationDate(String data) {
+/*function String extractApplicationDate(String data) {
 
     String[] keyValuePairs = data.substring(1, data.length() - 1).split(", ");
 
@@ -419,4 +420,17 @@ function String extractApplicationDate(String data) {
         }
     }
     return "";
+}*/
+
+function String extractApplicationDate(String data) {
+ 
+    String[] keyValuePairs = data.substring(1, data.length() - 1).split(", ");
+
+    for (String pair : keyValuePairs) {
+        String[] keyValue = pair.split("=");
+        if ("applicationdate".equals(keyValue[0])) {
+            return "null".equals(keyValue[1]) ? null : keyValue[1];
+        }
+    }
+    return null;
 }
