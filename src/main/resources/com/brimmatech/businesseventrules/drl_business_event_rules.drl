@@ -405,7 +405,7 @@ function boolean validCdcPayloadData(String oldData, String updatedData) {
     String oldApplicationDate = extractApplicationDate(oldData);
     String updatedApplicationDate = extractApplicationDate(updatedData);
     //return true;
-    return (oldApplicationDate == null || oldApplicationDate.isEmpty()) && (updatedApplicationDate != null && !updatedApplicationDate.isEmpty());
+    return ((oldApplicationDate == null || oldApplicationDate.isEmpty()) && (updatedApplicationDate != null && !updatedApplicationDate.isEmpty()));
     //return (oldApplicationDate.equals("null") || oldApplicationDate.isEmpty()) && !updatedApplicationDate.equals("null");
 }
 
