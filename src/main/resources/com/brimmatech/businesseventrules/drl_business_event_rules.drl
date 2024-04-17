@@ -388,9 +388,9 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
                 }
 
                 if (!folderId.isEmpty() && !oldData.isEmpty() && !updatedData.isEmpty()) {
-                    if (!validCdcPayloadData(oldData, updatedData)) {
+                    /*if (!validCdcPayloadData(oldData, updatedData)) {
                         folderId = "";
-                    }
+                    }*/
                     break;
                 }
             }
