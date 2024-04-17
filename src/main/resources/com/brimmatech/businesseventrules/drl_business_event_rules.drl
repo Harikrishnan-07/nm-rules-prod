@@ -409,7 +409,8 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
 
     function String extractApplicationDate(String data) {
 
-        String[] keyValuePairs = data.substring(1, data.length() - 1).split(", ");
+        String tempValue = data.substring(1, data.length() - 1);
+        String[] keyValuePairs = tempValue.split(", ");
 
         for (String pair : keyValuePairs) {
             String[] keyValue = pair.split("=");
