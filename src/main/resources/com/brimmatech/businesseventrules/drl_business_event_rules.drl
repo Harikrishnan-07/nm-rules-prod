@@ -404,7 +404,7 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
         String oldApplicationDate = extractApplicationDate(oldData);
         String updatedApplicationDate = extractApplicationDate(updatedData);
         
-        return oldApplicationDate.equals("null") && !updatedApplicationDate.equals("null");
+        return ((oldApplicationDate.equals("null") || oldApplicationDate.equals("")) && !updatedApplicationDate.equals("null"));
     }
 
     function String extractApplicationDate(String data) {
