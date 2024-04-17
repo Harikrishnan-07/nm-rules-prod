@@ -64,4 +64,4 @@
                
 [condition][]If Respa application submitted = eval(!getFolderIdsForRespaApplicationSubmitted($rulesDataDto).isEmpty())
 [consequence][]Send notifications for Respa application submitted = 
-               $ruleValidationResult.setValidationResult(getFolderIdsForRespaApplicationSubmitted($rulesDataDto, 0));
+               $ruleValidationResult.setValidationResult(getFolderIdsForRespaApplicationSubmitted($rulesDataDto));
