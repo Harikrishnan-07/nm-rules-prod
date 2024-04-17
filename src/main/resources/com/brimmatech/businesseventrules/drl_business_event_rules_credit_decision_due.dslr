@@ -74,21 +74,15 @@ function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
 
                     if ("FolderId".equals(key)) {
                         folderId = value;
-                    }
-
-                    if ("beforeData".equals(key)) {
+                    } else if ("beforeData".equals(key)) {
                         oldData = value;
-                    }
-
-                    if ("afterData".equals(key)) {
+                    } else if ("afterData".equals(key)) {
                         updatedData = value;
                     }
                 }
 
                 if (!folderId.isEmpty() && !oldData.isEmpty() && !updatedData.isEmpty()) {
-                    if(validCdcPayloadData(oldData, updatedData)) {
-                        
-                    } else {
+                    if (!validCdcPayloadData(oldData, updatedData)) {
                         folderId = "";
                     }
                     break;
@@ -101,28 +95,22 @@ function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
 }
 
 function boolean validCdcPayloadData(String oldData, String updatedData) {
-    
-    boolean isValid = false;
-    
-    String[] keyValuePairsBeforeData = oldData.substring(1, oldData.length() - 1).split(", ");
-    String[] keyValuePairsAfterData = updatedData.substring(1, updatedData.length() - 1).split(", ");
 
-    Map<String, String> oldMap = new HashMap<>();
-    Map<String, String> updatedMap = new HashMap<>();
+    String oldApplicationDate = extractApplicationDate(oldData);
+    String updatedApplicationDate = extractApplicationDate(updatedData);
 
-    for (String pair : keyValuePairsBeforeData) {
-        String[] keyValueCdcData = pair.split("=");
-        oldMap.put(keyValueCdcData[0], keyValueCdcData[1]);
+    return (oldApplicationDate.equals("null") || oldApplicationDate.isEmpty()) && !updatedApplicationDate.equals("null");
+}
+
+function String extractApplicationDate(String data) {
+
+    String[] keyValuePairs = data.substring(1, data.length() - 1).split(", ");
+
+    for (String pair : keyValuePairs) {
+        String[] keyValue = pair.split("=");
+        if ("applicationdate".equals(keyValue[0])) {
+            return keyValue[1];
+        }
     }
-
-    for (String pair : keyValuePairsAfterData) {
-        String[] keyValueCdcData = pair.split("=");
-        updatedMap.put(keyValueCdcData[0], keyValueCdcData[1]);
-    }
-
-    String oldApplicationDate = oldMap.get("applicationdate");
-    String updatedApplicationDate = updatedMap.get("applicationdate");
-    
-    isValid = ((oldApplicationDate.equals("null") || oldApplicationDate.isEmpty()) && !updatedApplicationDate.equals("null"));
-    return isValid;
+    return "";
 }
