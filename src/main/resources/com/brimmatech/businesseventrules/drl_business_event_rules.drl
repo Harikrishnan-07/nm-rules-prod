@@ -417,15 +417,19 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
 
     function String extractApplicationDate(String data) {
 
+        String applicationDate = "NA";
+
         String tempValue = data.substring(1, data.length() - 1);
         String[] keyValuePairs = tempValue.split(", ");
 
         for (String pair : keyValuePairs) {
             String[] keyValue = pair.split("=");
             System.out.println("keyValue[0]::"+keyValue[0]+":keyValue[1]:"+keyValue[1]+"##");
-            if ("applicationdate".equals(keyValue[0])) {
-                return keyValue[1];
+            if (keyValue.length == 2 && "applicationdate".equals(keyValue[0])) {
+                applicationDate = keyValue[1];
+            } else {
+                applicationDate = ""; 
             }
         }
-        return "NA";
+        return applicationDate;
     }
