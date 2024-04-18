@@ -426,5 +426,5 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
                 return keyValue[1];
             }
         }
-        return "";
+        return "NA";
     }
