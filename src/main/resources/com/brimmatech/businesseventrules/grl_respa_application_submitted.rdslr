@@ -7,7 +7,7 @@ rule "grl_respa_application_submitted"
 	agenda-group "respa_application"
 	when
 		For trigger event
-		If Respa application submitted
+		If application submitted
 	then
-		Send notifications for Respa application submitted
+		Send notifications for application submitted
 end
