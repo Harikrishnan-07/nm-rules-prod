@@ -400,15 +400,14 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
                     
             System.out.println("Application ruleName:"+ruleName+":folderId::"+folderId + "::oldData::"+oldData +"::updatedData::"+updatedData);
 
-                if (!folderId.isEmpty() && !oldData.isEmpty() && !updatedData.isEmpty()) {
-                    if (!validCdcPayloadData(oldData, updatedData, fieldName)) {
-                        folderId = "";
-                        System.out.println("Test Failed for Application:"+ruleName+ "for field" + fieldName + " and folder id:"+folderId);
-                    } else {
-                        System.out.println("Test succeeded for Application:"+ruleName+ "for field" + fieldName +" and folder id:"+folderId);
-                    }
-                    break;
+            if (!folderId.isEmpty() && !oldData.isEmpty() && !updatedData.isEmpty()) {
+                if (!validCdcPayloadData(oldData, updatedData, fieldName)) {
+                    folderId = "";
+                    System.out.println("Test Failed for Application:"+ruleName+ " for field " + fieldName + " and folder id:"+folderId);
+                } else {
+                    System.out.println("Test succeeded for Application:"+ruleName+ " for field " + fieldName +" and folder id:"+folderId);
                 }
+                break;
             }
         }
     }
@@ -425,8 +424,8 @@ function boolean validCdcPayloadData(String oldData, String updatedData, String 
         
     System.out.println("oldDate::"+oldDate+":updatedDate:"+updatedDate);
         
-    return ((oldDate.equals("null") || oldDate.isEmpty()) 
-        && !updatedDate.isEmpty() && !updatedDate.equals("null") && !updatedDate.equals("NA"));
+    return ((oldDate == null || oldDate.equals("null") || oldDate.isEmpty()) 
+        && updatedDate != null && !updatedDate.isEmpty() && !updatedDate.equals("null") && !updatedDate.equals("NA"));
 }
 
 function String extractRequiredDate(String data, String dateFieldName) {
@@ -440,7 +439,7 @@ function String extractRequiredDate(String data, String dateFieldName) {
             
         String[] keyValue = pair.split("=");
             
-        if(dateFieldName.equals(keyValue[0])) {
+        if(dateFieldName.equals(keyValue[0]) && keyValue.length >= 2) {
                 
             System.out.println("keyValue Length#"+keyValue.length+":keyValue[0]:"+keyValue[0]+"#");
                 
