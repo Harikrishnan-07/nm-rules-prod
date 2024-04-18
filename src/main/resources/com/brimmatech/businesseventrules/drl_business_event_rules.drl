@@ -358,7 +358,7 @@ function String getFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int day
     return validFolderIds;
 }
     
-String getFolderIdsForApplicationSubmitted(RulesDataDto rulesDataDto) {
+function String getFolderIdsForApplicationSubmitted(RulesDataDto rulesDataDto) {
 
     String folderId = "";
     String oldData = "";
@@ -444,7 +444,7 @@ function String extractRequiredDate(String data, String dateFieldName) {
         String[] keyValue = pair.split("=");
 
         if (dateFieldName.equals(keyValue[0]) && keyValue.length >= 2) {
-            // Print informative logs
+ 
             System.out.println("Field: " + keyValue[0] + ", Value: " + keyValue[1]);
             
             if (keyValue.length == 2) {    
