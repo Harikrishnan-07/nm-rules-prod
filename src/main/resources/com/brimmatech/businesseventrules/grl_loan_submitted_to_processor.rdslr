@@ -4,6 +4,10 @@ import java.lang.Number;
 
 rule "grl_loan_submitted_to_processor"
 	dialect "mvel"
+	agenda-group "submitted_to_processor"
 	when
+		For trigger event
+		If Respa application submitted
 	then
+		Send notifications for Respa application submitted
 end
