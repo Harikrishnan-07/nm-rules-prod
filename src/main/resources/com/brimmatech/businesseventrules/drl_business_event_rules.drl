@@ -426,7 +426,7 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
             
             String[] keyValue = pair.split("=");
             
-            System.out.println("keyValue Length#"+keyValue.length+":keyValue[0]:"+keyValue[0]+);
+            System.out.println("keyValue Length#"+keyValue.length+":keyValue[0]:"+keyValue[0]+"#");
             
             if (keyValue.length == 2 && "applicationdate".equals(keyValue[0])) {
                 
