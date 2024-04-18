@@ -428,13 +428,15 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
             
             System.out.println("keyValue Length#"+keyValue.length+":keyValue[0]:"+keyValue[0]+"#");
             
-            if (keyValue.length == 2 && "applicationdate".equals(keyValue[0])) {
+            if (keyValue.length == 2) { 
                 
-                System.out.println(":keyValue[1]:"+keyValue[1]+"##");
-                applicationDate = keyValue[1];
-            
-            } else {
-                applicationDate = ""; 
+                if("applicationdate".equals(keyValue[0])) {
+                
+                    System.out.println(":keyValue[1]:"+keyValue[1]+"##");
+                    applicationDate = keyValue[1];
+                } else {
+                    applicationDate = ""; 
+                }
             }
         }
         return applicationDate;
