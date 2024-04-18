@@ -1,0 +1,9 @@
+package com.brimmatech.businesseventrules;
+
+import java.lang.Number;
+
+rule "grl_uw_approved_clear_to_close"
+	dialect "mvel"
+	when
+	then
+end
