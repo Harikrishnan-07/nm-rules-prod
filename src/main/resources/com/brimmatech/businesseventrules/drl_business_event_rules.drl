@@ -358,7 +358,7 @@ function String getFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int day
     return validFolderIds;
 }
     
-function String getFolderIdsForRespaApplication(RulesDataDto rulesDataDto) {
+function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataDto) {
 
     String folderId = "";
     String oldData = "";
