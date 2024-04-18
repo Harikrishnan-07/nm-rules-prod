@@ -386,7 +386,7 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
                         }
                     }
                     
-                    System.out.println("folderId::"+folderId);
+                    System.out.println("Respa Application::folderId::"+folderId + "::oldData::"+oldData +"::updatedData::"+updatedData+"::");
 
                     if (!folderId.isEmpty() && !oldData.isEmpty() && !updatedData.isEmpty()) {
                         if (!validCdcPayloadData(oldData, updatedData)) {
