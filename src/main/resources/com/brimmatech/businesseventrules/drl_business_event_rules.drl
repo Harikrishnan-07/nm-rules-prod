@@ -385,10 +385,13 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
                             updatedData = value;
                         }
                     }
+                    
+                    System.out.println("folderId::"+folderId);
 
                     if (!folderId.isEmpty() && !oldData.isEmpty() && !updatedData.isEmpty()) {
                         if (!validCdcPayloadData(oldData, updatedData)) {
                             folderId = "";
+                            System.out.println("Test Failed for Respa Application::"+folderId);
                         }
                         break;
                     }
@@ -401,8 +404,12 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
 
     function boolean validCdcPayloadData(String oldData, String updatedData) {
 
+        System.out.println("OldData::"+oldData+":updatedData:"+updatedData);
+        
         String oldApplicationDate = extractApplicationDate(oldData);
         String updatedApplicationDate = extractApplicationDate(updatedData);
+        
+        System.out.println("oldApplicationDate::"+oldApplicationDate+":updatedApplicationDate:"+updatedApplicationDate);
         
         return (oldApplicationDate.equals("null") && !updatedApplicationDate.equals("null"));
     }
