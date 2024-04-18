@@ -370,9 +370,9 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
         String ruleName = rulesData.getRuleName();
 
         if ("RespaApplication".equals(ruleName)) {
-            fieldName = "processordate";
-        } else if("SubmittedToProcessor".equals(ruleName)) {
             fieldName = "applicationdate";
+        } else if("SubmittedToProcessor".equals(ruleName)) {
+            fieldName = "processordate";
         } else if("SubmittedToLender".equals(ruleName)) {
             fieldName = "uwsubdatetime";
         } else if("UWApprovedClearToClose".equals(ruleName)) {
