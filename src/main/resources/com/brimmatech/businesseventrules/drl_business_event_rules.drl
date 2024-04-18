@@ -358,7 +358,7 @@ function String getFolderIdsForCreditDecision(RulesDataDto rulesDataDto, int day
     return validFolderIds;
 }
     
-function String getFolderIdsForApplicationSubmitted(RulesDataDto rulesDataDto) {
+String getFolderIdsForApplicationSubmitted(RulesDataDto rulesDataDto) {
 
     String folderId = "";
     String oldData = "";
@@ -366,90 +366,94 @@ function String getFolderIdsForApplicationSubmitted(RulesDataDto rulesDataDto) {
     String fieldName = "";
 
     for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
-
         String ruleName = rulesData.getRuleName();
 
-        if ("RespaApplication".equals(ruleName)) {
-            fieldName = "applicationdate";
-        } else if("SubmittedToProcessor".equals(ruleName)) {
-            fieldName = "processordate";
-        } else if("SubmittedToLender".equals(ruleName)) {
-            fieldName = "uwsubdatetime";
-        } else if("UWApprovedClearToClose".equals(ruleName)) {
-            fieldName = "cleartoclosedatetime";
+        switch (ruleName) {
+            case "RespaApplication":
+                fieldName = "applicationdate";
+                break;
+            case "SubmittedToProcessor":
+                fieldName = "processordate";
+                break;
+            case "SubmittedToLender":
+                fieldName = "uwsubdatetime";
+                break;
+            case "UWApprovedClearToClose":
+                fieldName = "cleartoclosedatetime";
+                break;
         }
-                        
+
         List<String> rulesDataList = rulesData.getRuleDataList();
 
         for (String ruleData : rulesDataList) {
             String[] keyValue = ruleData.split("\\|");
 
             if (keyValue.length == 2) {
-    
                 String key = keyValue[0];
                 String value = keyValue[1];
-    
-                if ("FolderId".equals(key)) {
-                    folderId = value;
-                } else if ("beforeData".equals(key)) {
-                    oldData = value;
-                } else if ("afterData".equals(key)) {
-                    updatedData = value;
+
+                switch (key) {
+                    case "FolderId":
+                        folderId = value;
+                        break;
+                    case "beforeData":
+                        oldData = value;
+                        break;
+                    case "afterData":
+                        updatedData = value;
+                        break;
                 }
             }
-                    
-            System.out.println("Application ruleName:"+ruleName+":folderId::"+folderId + "::oldData::"+oldData +"::updatedData::"+updatedData);
 
+         
             if (!folderId.isEmpty() && !oldData.isEmpty() && !updatedData.isEmpty()) {
+         
                 if (!validCdcPayloadData(oldData, updatedData, fieldName)) {
+                    System.out.println("Test failed for rule: " + ruleName + ", field: " + fieldName + ", folder id: " + folderId);
                     folderId = "";
-                    System.out.println("Test Failed for Application:"+ruleName+ " for field " + fieldName + " and folder id:"+folderId);
                 } else {
-                    System.out.println("Test succeeded for Application:"+ruleName+ " for field " + fieldName +" and folder id:"+folderId);
+                    System.out.println("Test succeeded for rule: " + ruleName + ", field: " + fieldName + ", folder id: " + folderId);
                 }
                 break;
             }
         }
     }
-
     return folderId;
 }
 
 function boolean validCdcPayloadData(String oldData, String updatedData, String fieldName) {
-
-    System.out.println("OldData::"+oldData+":updatedData:"+updatedData);
+ 
+    System.out.println("OldData: " + oldData + ", UpdatedData: " + updatedData);
         
     String oldDate = extractRequiredDate(oldData, fieldName);
     String updatedDate = extractRequiredDate(updatedData, fieldName);
         
-    System.out.println("oldDate::"+oldDate+":updatedDate:"+updatedDate);
+    System.out.println("OldDate: " + oldDate + ", UpdatedDate: " + updatedDate);
         
-    return ((oldDate == null || oldDate.equals("null") || oldDate.isEmpty()) 
-        && updatedDate != null && !updatedDate.isEmpty() && !updatedDate.equals("null") && !updatedDate.equals("NA"));
+    return (oldDate == null || oldDate.isEmpty() || oldDate.equals("null")) 
+        && updatedDate != null && !updatedDate.isEmpty() && !updatedDate.equals("null") && !updatedDate.equals("NA");
 }
 
 function String extractRequiredDate(String data, String dateFieldName) {
-
+    
     String requiredDate = "NA";
-
     String tempValue = data.substring(1, data.length() - 1);
     String[] keyValuePairs = tempValue.split(", ");
 
     for (String pair : keyValuePairs) {
-            
         String[] keyValue = pair.split("=");
+
+        if (dateFieldName.equals(keyValue[0]) && keyValue.length >= 2) {
+            // Print informative logs
+            System.out.println("Field: " + keyValue[0] + ", Value: " + keyValue[1]);
             
-        if(dateFieldName.equals(keyValue[0]) && keyValue.length >= 2) {
-                
-            System.out.println("keyValue Length#"+keyValue.length+":keyValue[0]:"+keyValue[0]+"#");
-                
             if (keyValue.length == 2) {    
-                System.out.println(":keyValue[1]:"+keyValue[1]+"##");
                 requiredDate = keyValue[1];
             } else {
                 requiredDate = "";
             }
         }
     }
+    
     return requiredDate;
 }
