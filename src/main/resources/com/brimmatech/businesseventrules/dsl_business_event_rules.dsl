@@ -1,9 +1,9 @@
 [condition][]For trigger event = $rulesDataDto:  RulesDataDto()
                                    $ruleValidationResult: RuleValidationResult()
                                    
-[condition][]If Respa application submitted = eval(getFolderIdsForRespaApplicationSubmitted($rulesDataDto).length() > 0)
-[consequence][]Send notifications for Respa application submitted = 
-               $ruleValidationResult.setValidationResult(getFolderIdsForRespaApplicationSubmitted($rulesDataDto));                                   
+[condition][]If application submitted = eval(getFolderIdsForApplicationSubmitted($rulesDataDto).length() > 0)
+[consequence][]Send notifications for application submitted = 
+               $ruleValidationResult.setValidationResult(getFolderIdsForApplicationSubmitted($rulesDataDto));                                   
                                    
 [condition][]If initial disclosure due today = eval(retrieveApplicationDateAndFolderName($rulesDataDto, 2).length() > 0)
 [condition][]If initial disclosure due in one day = eval(retrieveApplicationDateAndFolderName($rulesDataDto, 1).length() > 0)
