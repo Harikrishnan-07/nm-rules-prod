@@ -411,7 +411,8 @@ function String getFolderIdsForRespaApplicationSubmitted(RulesDataDto rulesDataD
         
         System.out.println("oldApplicationDate::"+oldApplicationDate+":updatedApplicationDate:"+updatedApplicationDate);
         
-        return (oldApplicationDate.equals("null") && !updatedApplicationDate.equals("null"));
+        return ((oldApplicationDate.equals("null") || oldApplicationDate.isEmpty()) 
+        && !updatedApplicationDate.isEmpty() && !updatedApplicationDate.equals("null"));
     }
 
     function String extractApplicationDate(String data) {
