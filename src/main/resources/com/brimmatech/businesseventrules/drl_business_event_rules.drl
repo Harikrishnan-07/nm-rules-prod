@@ -364,6 +364,8 @@ function String getFolderIdsForApplicationSubmitted(RulesDataDto rulesDataDto) {
     String oldData = "";
     String updatedData = "";
     String fieldName = "";
+    
+    System.out.println("Application Submission process started...");
 
     for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
         String ruleName = rulesData.getRuleName();
@@ -382,11 +384,15 @@ function String getFolderIdsForApplicationSubmitted(RulesDataDto rulesDataDto) {
                 fieldName = "cleartoclosedatetime";
                 break;
         }
+        
+        System.out.println("ruleName:"+ruleName+":fieldName:"+fieldName);
 
         List<String> rulesDataList = rulesData.getRuleDataList();
 
         for (String ruleData : rulesDataList) {
             String[] keyValue = ruleData.split("\\|");
+
+            System.out.println("keyValue Length:"+keyValue.length);
 
             if (keyValue.length == 2) {
                 String key = keyValue[0];
