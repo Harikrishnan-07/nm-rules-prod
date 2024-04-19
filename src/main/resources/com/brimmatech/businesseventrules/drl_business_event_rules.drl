@@ -452,7 +452,7 @@ function String extractRequiredDate(String data, String dateFieldName) {
 
         if (dateFieldName.equals(keyValue[0])) {
  
-            System.out.println("Field: " + keyValue[0] + ", Value: " + keyValue[1]);
+            System.out.println("Field: " + keyValue[0] + " Key Value length:" + keyValue.length);
             
             if (keyValue.length == 2) {    
                 requiredDate = keyValue[1];
