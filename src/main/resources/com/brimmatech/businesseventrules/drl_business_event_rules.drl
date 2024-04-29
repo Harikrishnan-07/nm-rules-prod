@@ -85,6 +85,8 @@ function String fetchExpiryDueFolderIds(RulesDataDto rulesDataDto, int days) {
     String expDate = "";
     String folderId = "";
     String validFolderIds = "";
+    
+    System.out.println("Lock Expiry process started...");
 
     for (RulesData rulesData : rulesDataDto.getRulesDataList()) {
         String ruleName = rulesData.getRuleName();
@@ -114,6 +116,7 @@ function String fetchExpiryDueFolderIds(RulesDataDto rulesDataDto, int days) {
                     folderId = "";
                     expDate = "";
                 }
+                System.out.println("Expiry due validation# validFolderIds: "+validFolderIds);
             }
         }
     }
@@ -128,6 +131,8 @@ function boolean isExpiryDue(String expDate, int days) {
     LocalDate expiryLocalDate = LocalDate.parse(expDate, formatter);
 
     LocalDate expiryDueDate = expiryLocalDate.minusDays(days);
+    
+    System.out.println("Expiry due validation# expiryLocalDate: "+expiryLocalDate+" expiryDueDate:"+expiryDueDate);
 
     return expiryDueDate.isEqual(LocalDate.now());
 }
