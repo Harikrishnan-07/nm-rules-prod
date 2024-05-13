@@ -430,6 +430,7 @@ function String getFolderIdsForApplicationSubmitted(RulesDataDto rulesDataDto) {
             }
         }
     }
+    
     return folderId;
 }
 
