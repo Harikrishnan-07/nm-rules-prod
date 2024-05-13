@@ -75,7 +75,6 @@ function boolean isInitialDisclosureDue(String applicationDate, int days, LocalD
 
     LocalDate start = LocalDate.parse(applicationDate, formatter);
 
-
     return calculateElapsedBusinessDays(start, LocalDate.now(), 1, holidays, excludedDaysOfWeek) == days;
 }
 
