@@ -1,0 +1,13 @@
+.idea/*
+*.iml
+target/
+/out
+
+#Eclipse IDE related files
+.classpath
+.factorypath
+.project
+.settings/
+transaction-logs/
+
+.gitkeep
