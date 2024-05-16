@@ -8,7 +8,6 @@ import java.time.DayOfWeek;
 
 function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, int days) {
 
-    //String empty = "";
     String validFolderIds = "";
     String applicationDate = "";
     String folderId = "";
