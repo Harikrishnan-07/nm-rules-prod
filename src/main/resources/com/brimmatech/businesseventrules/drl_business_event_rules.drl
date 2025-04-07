@@ -34,6 +34,7 @@ function String retrieveApplicationDateAndFolderName(RulesDataDto rulesDataDto, 
         LocalDate.parse("11/29/2024", formatter),
         
         LocalDate.parse("12/24/2024", formatter),
+        
         LocalDate.parse("12/25/2024", formatter)
     };
     
